@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Morrow Goods — considered objects for everyday rituals." />
+    <title>Morrow Goods — Objects for the everyday</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="announcement">Free domestic delivery on orders over $75 <button aria-label="Close announcement">×</button></div>
+    <header class="site-header">
+      <button class="menu-button" aria-label="Open navigation"><span></span><span></span></button>
+      <a class="wordmark" href="#top">Morrow<span>Goods</span></a>
+      <nav aria-label="Primary navigation"><a href="#shop">Shop all</a><a href="#arrival">New arrivals</a><a href="#journal">Journal</a></nav>
+      <div class="header-actions">
+        <button class="text-button" id="open-auth">Sign in</button>
+        <button class="icon-button bag-button" id="open-cart" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Zm4 0V6a3 3 0 0 1 6 0v2"/></svg><span class="cart-count">0</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" id="shop">
+        <div class="hero-copy">
+          <p class="microcopy">Edition 01 · Autumn / Winter</p>
+          <h1>Objects that<br />make a <em>day</em> of it.</h1>
+          <p class="hero-text">Useful things with a little ceremony built in. Made for the in-between moments you want to hold onto.</p>
+          <a class="arrow-link" href="#products">Shop the collection <span>↘</span></a>
+        </div>
+        <figure class="hero-image">
+          <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=1400&q=85" alt="A small ceramic vase and dried stems on a table" />
+          <figcaption>Made to linger. <span>01 / 04</span></figcaption>
+        </figure>
+        <div class="hero-note"><span class="roundel">MG</span><p>Small rituals,<br />well supplied.</p></div>
+      </section>
+
+      <section class="collection-intro" id="arrival">
+        <p class="microcopy">The everyday collection</p>
+        <div><h2>Slow goods for<br />fast-moving days.</h2><p>Our first collection brings warmth and utility to your kitchen, desk, and doorstep.</p></div>
+      </section>
+
+      <section class="products" id="products" aria-label="Shop products">
+        <div class="section-head"><p>Featured pieces <span>(06)</span></p><button class="filter-button">Filter <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M7 12h10M10 17h4"/></svg></button></div>
+        <div class="product-grid" id="product-grid"></div>
+      </section>
+
+      <section class="editorial" id="journal">
+        <div class="editorial-image"><img src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1100&q=85" alt="Clay ceramics in a quiet studio" /></div>
+        <div class="editorial-copy"><h2>Nothing hurried<br />was ever held dear.</h2><p>Notes on domestic rituals, people making things slowly, and the good kind of ordinary.</p><a class="arrow-link" href="#journal">Read the journal <span>↗</span></a></div>
+      </section>
+    </main>
+
+    <footer><a class="wordmark" href="#top">Morrow<span>Goods</span></a><p>Objects for the everyday ritual.</p><p>© 2024 Morrow Goods</p></footer>
+
+    <div class="scrim" id="scrim"></div>
+    <aside class="cart-panel" id="cart-panel" aria-label="Shopping bag" aria-hidden="true">
+      <div class="panel-head"><p>Your bag <span id="panel-count">(0)</span></p><button class="close-button" data-close aria-label="Close cart">×</button></div>
+      <div class="cart-items" id="cart-items"><div class="empty-cart"><span class="roundel">MG</span><h2>Your bag is waiting.</h2><p>Add a little something from the collection.</p><button class="underlined" data-close>Continue shopping</button></div></div>
+      <div class="cart-footer" id="cart-footer" hidden><div><span>Subtotal</span><strong id="subtotal">$0.00</strong></div><small>Shipping and taxes calculated at checkout.</small><button class="checkout-button">Checkout <span>→</span></button></div>
+    </aside>
+
+    <section class="auth-panel" id="auth-panel" aria-label="Sign in" aria-hidden="true">
+      <button class="close-button auth-close" data-close aria-label="Close sign in">×</button>
+      <div class="auth-art"><div class="auth-orbit orbit-one"></div><div class="auth-orbit orbit-two"></div><span class="roundel">MG</span><p>Good things,<br />awaiting you.</p></div>
+      <div class="auth-form"><a class="wordmark" href="#top">Morrow<span>Goods</span></a><div><p class="microcopy">Welcome back</p><h2>Come on in.</h2><p class="auth-subtitle">Sign in to save your favorite pieces and find your bag anywhere.</p></div><button class="google-button" id="google-signin"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M21.35 12.28c0-.71-.06-1.4-.18-2.05H12v3.88h5.24a4.48 4.48 0 0 1-1.94 2.94v2.52h3.14c1.84-1.69 2.91-4.18 2.91-7.29Z"/><path fill="#34A853" d="M12 21.8c2.63 0 4.84-.87 6.45-2.23l-3.14-2.52c-.87.58-1.98.93-3.31.93-2.54 0-4.69-1.72-5.46-4.03H3.3v2.6A9.75 9.75 0 0 0 12 21.8Z"/><path fill="#FBBC05" d="M6.54 13.95a5.86 5.86 0 0 1 0-3.9v-2.6H3.3a9.73 9.73 0 0 0 0 9.1l3.24-2.6Z"/><path fill="#EA4335" d="M12 6.02c1.43 0 2.72.49 3.73 1.45l2.8-2.8C16.83 3.08 14.63 2.2 12 2.2a9.75 9.75 0 0 0-8.7 5.25l3.24 2.6C7.31 7.74 9.46 6.02 12 6.02Z"/></svg>Continue with Google</button><div class="divider"><span></span>or continue with email<span></span></div><label>Email address<input type="email" placeholder="you@example.com" /></label><button class="email-button" id="email-signin">Continue with email <span>→</span></button><p class="terms">By continuing, you agree to our Terms and Privacy Policy.</p></div>
+    </section>
+    <div class="toast" id="toast" role="status"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
