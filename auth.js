@@ -3,7 +3,7 @@ const googleButton = document.querySelector('#google-signin');
 
 function setAuthAction(user) {
   if (!user) return;
-  authButton.textContent = `Hi, ${user.name.split(' ')[0]}`;
+  authButton.querySelector('span').textContent = `Hi, ${user.name.split(' ')[0]}`;
   authButton.title = `Signed in as ${user.email}. Click to sign out.`;
   authButton.onclick = async () => {
     await fetch('/api/logout', { method: 'POST' });

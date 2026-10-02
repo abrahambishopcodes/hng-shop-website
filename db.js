@@ -33,16 +33,24 @@ export async function initializeDatabase() {
 }
 
 export async function saveGoogleUser(profile) {
-  const result = await db.query(
+  const inserted = await db.query(
     `insert into public.users (google_id, email, full_name, avatar_url)
      values ($1, $2, $3, $4)
-     on conflict (google_id) do update set
-       email = excluded.email,
-       full_name = excluded.full_name,
-       avatar_url = excluded.avatar_url,
+     on conflict (google_id) do nothing
+     returning google_id, email, full_name, avatar_url, created_at, last_sign_in_at`,
+    [profile.sub, profile.email, profile.name || profile.email, profile.picture || null]
+  );
+
+  if (inserted.rowCount) return { ...inserted.rows[0], isNew: true };
+
+  const updated = await db.query(
+    `update public.users set
+       email = $2,
+       full_name = $3,
+       avatar_url = $4,
        last_sign_in_at = now()
      returning google_id, email, full_name, avatar_url, created_at, last_sign_in_at`,
     [profile.sub, profile.email, profile.name || profile.email, profile.picture || null]
   );
-  return result.rows[0];
+  return { ...updated.rows[0], isNew: false };
 }

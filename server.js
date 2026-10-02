@@ -6,8 +6,17 @@ import cookieParser from 'cookie-parser';
 import express from 'express';
 import { OAuth2Client } from 'google-auth-library';
 import { initializeDatabase, saveGoogleUser } from './db.js';
+import { sendWelcomeEmail } from './email.js';
 
-const required = ['GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET', 'SESSION_SECRET', 'SUPABASE_DATABASE_CONNECTION_STRING'];
+const required = [
+  'GOOGLE_CLIENT_ID',
+  'GOOGLE_CLIENT_SECRET',
+  'SESSION_SECRET',
+  'SUPABASE_DATABASE_CONNECTION_STRING',
+  'BREVO_API_KEY',
+  'EMAIL_FROM',
+  'EMAIL_FROM_NAME'
+];
 const missing = required.filter((name) => !process.env[name]);
 if (missing.length) {
   throw new Error(`Missing required environment variables: ${missing.join(', ')}`);
@@ -81,6 +90,10 @@ app.get('/auth/google/callback', async (req, res) => {
     if (!profile?.sub || !profile.email_verified) throw new Error('Google did not return a verified email address.');
     const user = await saveGoogleUser(profile);
     setSession(res, { id: user.google_id, name: user.full_name, email: user.email, picture: user.avatar_url });
+    if (user.isNew) {
+      sendWelcomeEmail({ email: user.email, name: user.full_name })
+        .catch((error) => console.error('Welcome email failed:', error.message));
+    }
     res.redirect('/?auth=success');
   } catch (error) {
     console.error('Google OAuth callback failed:', error.message);

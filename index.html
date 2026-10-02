@@ -3,73 +3,156 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Morrow Goods — considered objects for everyday rituals." />
-    <title>Morrow Goods — Objects for the everyday</title>
+    <meta name="description" content="Morrow Goods — useful everyday goods for the kitchen, table, desk and candlelit evenings." />
+    <meta name="theme-color" content="#18231d" />
+    <title>Morrow Goods — Everyday goods</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="announcement">Free domestic delivery on orders over $75 <button aria-label="Close announcement">×</button></div>
-    <header class="site-header">
-      <button class="menu-button" aria-label="Open navigation"><span></span><span></span></button>
-      <a class="wordmark" href="#top">Morrow<span>Goods</span></a>
-      <nav aria-label="Primary navigation"><a href="#shop">Shop all</a><a href="#arrival">New arrivals</a><a href="#journal">Journal</a></nav>
+    <svg width="0" height="0" class="sprite" aria-hidden="true">
+      <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12.1a1 1 0 0 1-1 .9H7.2a1 1 0 0 1-1-.9L5 8Z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></symbol>
+      <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-truck" viewBox="0 0 24 24"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14M10 7V5h4v2M7 7l1 12h8l1-12"/></symbol>
+    </svg>
+
+    <a class="skip-link" href="#shop">Skip to products</a>
+
+    <div class="announcement" id="announcement">
+      <p><svg class="icon" aria-hidden="true"><use href="#i-truck"/></svg> Free delivery on orders over $75</p>
+      <button class="announcement-close" id="close-announcement" aria-label="Dismiss announcement"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+    </div>
+
+    <header class="site-header" id="site-header">
+      <button class="icon-button menu-button" id="open-menu" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav"><svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg></button>
+      <a class="wordmark" href="#top" aria-label="Morrow Goods home">Morrow<span>Goods</span></a>
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+        <a href="#shop">Shop all</a>
+        <a href="#shop" data-nav-category="kitchen">Kitchen</a>
+        <a href="#shop" data-nav-category="candlelight">Candlelight</a>
+        <a href="#journal">Journal</a>
+      </nav>
       <div class="header-actions">
-        <button class="text-button" id="open-auth">Sign in</button>
-        <button class="icon-button bag-button" id="open-cart" aria-label="Open cart">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Zm4 0V6a3 3 0 0 1 6 0v2"/></svg><span class="cart-count">0</span>
+        <button class="text-button account-button" id="open-auth"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg><span>Sign in</span></button>
+        <button class="bag-button" id="open-cart" aria-label="Open bag, 0 items" aria-controls="cart-panel" aria-expanded="false">
+          <svg class="icon" aria-hidden="true"><use href="#i-bag"/></svg>
+          <span class="bag-label">Bag</span>
+          <span class="cart-count" aria-hidden="true">0</span>
         </button>
       </div>
     </header>
 
     <main id="top">
-      <section class="hero" id="shop">
-        <div class="hero-copy">
-          <p class="microcopy">Edition 01 · Autumn / Winter</p>
-          <h1>Objects that<br />make a <em>day</em> of it.</h1>
-          <p class="hero-text">Useful things with a little ceremony built in. Made for the in-between moments you want to hold onto.</p>
-          <a class="arrow-link" href="#products">Shop the collection <span>↘</span></a>
+      <section class="board" aria-labelledby="board-title">
+        <div class="board-copy">
+          <h1 id="board-title">Good goods,<br />fairly <span>priced.</span></h1>
+          <p>Six useful pieces for the kitchen, the table, the desk and the evening — from <strong>$16</strong>.</p>
+          <div class="board-actions">
+            <a class="button button-sign" href="#shop">Shop the stall <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <span class="board-note"><svg class="icon" aria-hidden="true"><use href="#i-truck"/></svg> Free delivery over $75</span>
+          </div>
         </div>
-        <figure class="hero-image">
-          <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=1400&q=85" alt="A small ceramic vase and dried stems on a table" />
-          <figcaption>Made to linger. <span>01 / 04</span></figcaption>
-        </figure>
-        <div class="hero-note"><span class="roundel">MG</span><p>Small rituals,<br />well supplied.</p></div>
+        <div class="board-feature" id="board-feature"></div>
       </section>
 
-      <section class="collection-intro" id="arrival">
-        <p class="microcopy">The everyday collection</p>
-        <div><h2>Slow goods for<br />fast-moving days.</h2><p>Our first collection brings warmth and utility to your kitchen, desk, and doorstep.</p></div>
+      <section class="shop" id="shop" aria-labelledby="shop-title">
+        <div class="shop-head">
+          <h2 id="shop-title">The stall</h2>
+          <p class="result-count" id="result-count" aria-live="polite"></p>
+        </div>
+        <div class="shop-controls">
+          <div class="crates" role="group" aria-label="Filter by category" id="crates"></div>
+          <label class="sort">
+            <span>Sort</span>
+            <select id="sort">
+              <option value="featured">Featured</option>
+              <option value="price-asc">Price: low to high</option>
+              <option value="price-desc">Price: high to low</option>
+              <option value="name">Name: A–Z</option>
+            </select>
+          </label>
+        </div>
+        <ul class="product-grid" id="product-grid"></ul>
       </section>
 
-      <section class="products" id="products" aria-label="Shop products">
-        <div class="section-head"><p>Featured pieces <span>(06)</span></p><button class="filter-button">Filter <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M7 12h10M10 17h4"/></svg></button></div>
-        <div class="product-grid" id="product-grid"></div>
-      </section>
-
-      <section class="editorial" id="journal">
-        <div class="editorial-image"><img src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1100&q=85" alt="Clay ceramics in a quiet studio" /></div>
-        <div class="editorial-copy"><h2>Nothing hurried<br />was ever held dear.</h2><p>Notes on domestic rituals, people making things slowly, and the good kind of ordinary.</p><a class="arrow-link" href="#journal">Read the journal <span>↗</span></a></div>
+      <section class="journal" id="journal" aria-labelledby="journal-title">
+        <img src="https://images.unsplash.com/photo-1753164725860-ffcd260b7b32?auto=format&fit=crop&w=1100&q=80" alt="A potter shaping a clay pot on a throwing wheel" loading="lazy" />
+        <div class="journal-copy">
+          <h2 id="journal-title">Made slowly, used daily.</h2>
+          <p>Notes from the makers behind the stall: how the pitchers are thrown, why the tapers are hand-dipped, and the good kind of ordinary.</p>
+          <a class="button button-ghost" href="#journal">Read the journal <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
       </section>
     </main>
 
-    <footer><a class="wordmark" href="#top">Morrow<span>Goods</span></a><p>Objects for the everyday ritual.</p><p>© 2024 Morrow Goods</p></footer>
+    <footer class="site-footer">
+      <a class="wordmark" href="#top">Morrow<span>Goods</span></a>
+      <ul>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-truck"/></svg> Free delivery over $75</li>
+        <li>Demo storefront — no real orders are placed</li>
+      </ul>
+      <p>© 2026 Morrow Goods</p>
+    </footer>
 
-    <div class="scrim" id="scrim"></div>
-    <aside class="cart-panel" id="cart-panel" aria-label="Shopping bag" aria-hidden="true">
-      <div class="panel-head"><p>Your bag <span id="panel-count">(0)</span></p><button class="close-button" data-close aria-label="Close cart">×</button></div>
-      <div class="cart-items" id="cart-items"><div class="empty-cart"><span class="roundel">MG</span><h2>Your bag is waiting.</h2><p>Add a little something from the collection.</p><button class="underlined" data-close>Continue shopping</button></div></div>
-      <div class="cart-footer" id="cart-footer" hidden><div><span>Subtotal</span><strong id="subtotal">$0.00</strong></div><small>Shipping and taxes calculated at checkout.</small><button class="checkout-button">Checkout <span>→</span></button></div>
+    <div class="scrim" id="scrim" hidden></div>
+
+    <aside class="cart-panel" id="cart-panel" aria-labelledby="cart-title" role="dialog" aria-modal="true" hidden>
+      <div class="panel-head">
+        <h2 id="cart-title">Your bag <span id="panel-count">(0)</span></h2>
+        <button class="icon-button" data-close aria-label="Close bag"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+      </div>
+      <div class="shipping-meter" id="shipping-meter">
+        <p id="shipping-text"></p>
+        <div class="meter" role="progressbar" aria-labelledby="shipping-text" aria-valuemin="0" aria-valuemax="75" id="meter"><span id="meter-fill"></span></div>
+      </div>
+      <ul class="cart-items" id="cart-items"></ul>
+      <div class="cart-empty" id="cart-empty">
+        <svg class="icon" aria-hidden="true"><use href="#i-bag"/></svg>
+        <h3>Your bag is empty.</h3>
+        <p>Pick something off the stall — everything ships free once you pass $75.</p>
+        <button class="button button-sign" data-close>Keep shopping</button>
+      </div>
+      <div class="cart-footer" id="cart-footer" hidden>
+        <dl><dt>Subtotal</dt><dd id="subtotal">$0.00</dd></dl>
+        <p>Taxes calculated at checkout.</p>
+        <button class="button button-sign button-wide" id="checkout">Checkout <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      </div>
     </aside>
 
-    <section class="auth-panel" id="auth-panel" aria-label="Sign in" aria-hidden="true">
-      <button class="close-button auth-close" data-close aria-label="Close sign in">×</button>
-      <div class="auth-art"><div class="auth-orbit orbit-one"></div><div class="auth-orbit orbit-two"></div><span class="roundel">MG</span><p>Good things,<br />awaiting you.</p></div>
-      <div class="auth-form"><a class="wordmark" href="#top">Morrow<span>Goods</span></a><div><p class="microcopy">Welcome back</p><h2>Come on in.</h2><p class="auth-subtitle">Sign in to save your favorite pieces and find your bag anywhere.</p></div><button class="google-button" id="google-signin"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M21.35 12.28c0-.71-.06-1.4-.18-2.05H12v3.88h5.24a4.48 4.48 0 0 1-1.94 2.94v2.52h3.14c1.84-1.69 2.91-4.18 2.91-7.29Z"/><path fill="#34A853" d="M12 21.8c2.63 0 4.84-.87 6.45-2.23l-3.14-2.52c-.87.58-1.98.93-3.31.93-2.54 0-4.69-1.72-5.46-4.03H3.3v2.6A9.75 9.75 0 0 0 12 21.8Z"/><path fill="#FBBC05" d="M6.54 13.95a5.86 5.86 0 0 1 0-3.9v-2.6H3.3a9.73 9.73 0 0 0 0 9.1l3.24-2.6Z"/><path fill="#EA4335" d="M12 6.02c1.43 0 2.72.49 3.73 1.45l2.8-2.8C16.83 3.08 14.63 2.2 12 2.2a9.75 9.75 0 0 0-8.7 5.25l3.24 2.6C7.31 7.74 9.46 6.02 12 6.02Z"/></svg>Continue with Google</button><div class="divider"><span></span>or continue with email<span></span></div><label>Email address<input type="email" placeholder="you@example.com" /></label><button class="email-button" id="email-signin">Continue with email <span>→</span></button><p class="terms">By continuing, you agree to our Terms and Privacy Policy.</p></div>
-    </section>
-    <div class="toast" id="toast" role="status"></div>
+    <dialog class="quick-view" id="quick-view" aria-labelledby="qv-name">
+      <button class="icon-button qv-close" data-qv-close aria-label="Close product details"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+      <div class="qv-body" id="qv-body"></div>
+    </dialog>
+
+    <dialog class="auth-panel" id="auth-panel" aria-labelledby="auth-title">
+      <button class="icon-button auth-close" data-auth-close aria-label="Close sign in"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+      <div class="auth-sign">
+        <p class="auth-sign-text">Your bag,<br />on every<br />device.</p>
+      </div>
+      <div class="auth-form">
+        <h2 id="auth-title">Sign in</h2>
+        <p class="auth-subtitle">Save your favourite pieces and pick up your bag where you left it.</p>
+        <button class="google-button" id="google-signin"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M21.35 12.28c0-.71-.06-1.4-.18-2.05H12v3.88h5.24a4.48 4.48 0 0 1-1.94 2.94v2.52h3.14c1.84-1.69 2.91-4.18 2.91-7.29Z"/><path fill="#34A853" d="M12 21.8c2.63 0 4.84-.87 6.45-2.23l-3.14-2.52c-.87.58-1.98.93-3.31.93-2.54 0-4.69-1.72-5.46-4.03H3.3v2.6A9.75 9.75 0 0 0 12 21.8Z"/><path fill="#FBBC05" d="M6.54 13.95a5.86 5.86 0 0 1 0-3.9v-2.6H3.3a9.73 9.73 0 0 0 0 9.1l3.24-2.6Z"/><path fill="#EA4335" d="M12 6.02c1.43 0 2.72.49 3.73 1.45l2.8-2.8C16.83 3.08 14.63 2.2 12 2.2a9.75 9.75 0 0 0-8.7 5.25l3.24 2.6C7.31 7.74 9.46 6.02 12 6.02Z"/></svg>Continue with Google</button>
+        <div class="divider"><span>or</span></div>
+        <form class="email-form" id="email-form" novalidate>
+          <label for="email-input">Email address</label>
+          <input id="email-input" type="email" autocomplete="email" placeholder="you@example.com" aria-describedby="email-error" />
+          <p class="field-error" id="email-error" aria-live="polite"></p>
+          <button class="button button-board button-wide" id="email-signin" type="submit">Continue with email <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        </form>
+        <p class="terms">By continuing, you agree to our Terms and Privacy Policy.</p>
+      </div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <script src="app.js"></script>
     <script src="auth.js"></script>
   </body>

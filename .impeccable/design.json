@@ -1,0 +1,462 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-02T10:47:15.929725+00:00",
+  "title": "Design System: Morrow Goods",
+  "extensions": {
+    "colorMeta": {
+      "board": {
+        "role": "primary",
+        "displayName": "Sign Board Green-Black",
+        "canonical": "oklch(24.3% 0.019 160.7)",
+        "tonalRamp": [
+          "oklch(15% 0.019 160.7)",
+          "oklch(25% 0.019 160.7)",
+          "oklch(35% 0.019 160.7)",
+          "oklch(45% 0.019 160.7)",
+          "oklch(58% 0.019 160.7)",
+          "oklch(70% 0.019 160.7)",
+          "oklch(82% 0.019 160.7)",
+          "oklch(95% 0.019 160.7)"
+        ]
+      },
+      "board-raised": {
+        "role": "primary",
+        "displayName": "Raised Board",
+        "canonical": "oklch(30.0% 0.026 158.1)",
+        "tonalRamp": [
+          "oklch(15% 0.026 158.1)",
+          "oklch(25% 0.026 158.1)",
+          "oklch(35% 0.026 158.1)",
+          "oklch(45% 0.026 158.1)",
+          "oklch(58% 0.026 158.1)",
+          "oklch(70% 0.026 158.1)",
+          "oklch(82% 0.026 158.1)",
+          "oklch(95% 0.026 158.1)"
+        ]
+      },
+      "crate-tomato": {
+        "role": "secondary",
+        "displayName": "Tomato",
+        "canonical": "oklch(57.0% 0.189 32.5)",
+        "tonalRamp": [
+          "oklch(15% 0.093 32.5)",
+          "oklch(25% 0.125 32.5)",
+          "oklch(35% 0.156 32.5)",
+          "oklch(45% 0.188 32.5)",
+          "oklch(58% 0.189 32.5)",
+          "oklch(70% 0.172 32.5)",
+          "oklch(82% 0.134 32.5)",
+          "oklch(95% 0.093 32.5)"
+        ]
+      },
+      "crate-mustard": {
+        "role": "secondary",
+        "displayName": "Market Mustard",
+        "canonical": "oklch(79.2% 0.152 83.2)",
+        "tonalRamp": [
+          "oklch(15% 0.081 83.2)",
+          "oklch(25% 0.106 83.2)",
+          "oklch(35% 0.131 83.2)",
+          "oklch(45% 0.152 83.2)",
+          "oklch(58% 0.152 83.2)",
+          "oklch(70% 0.144 83.2)",
+          "oklch(82% 0.114 83.2)",
+          "oklch(95% 0.081 83.2)"
+        ]
+      },
+      "crate-mustard-hover": {
+        "role": "secondary",
+        "displayName": "Mustard Hover",
+        "canonical": "oklch(84.2% 0.146 87.0)",
+        "tonalRamp": [
+          "oklch(15% 0.079 87.0)",
+          "oklch(25% 0.103 87.0)",
+          "oklch(35% 0.128 87.0)",
+          "oklch(45% 0.146 87.0)",
+          "oklch(58% 0.146 87.0)",
+          "oklch(70% 0.140 87.0)",
+          "oklch(82% 0.110 87.0)",
+          "oklch(95% 0.079 87.0)"
+        ]
+      },
+      "crate-blue": {
+        "role": "secondary",
+        "displayName": "Crate Blue",
+        "canonical": "oklch(50.1% 0.182 264.2)",
+        "tonalRamp": [
+          "oklch(15% 0.091 264.2)",
+          "oklch(25% 0.121 264.2)",
+          "oklch(35% 0.151 264.2)",
+          "oklch(45% 0.181 264.2)",
+          "oklch(58% 0.182 264.2)",
+          "oklch(70% 0.166 264.2)",
+          "oklch(82% 0.130 264.2)",
+          "oklch(95% 0.091 264.2)"
+        ]
+      },
+      "crate-leaf": {
+        "role": "secondary",
+        "displayName": "Leaf Green",
+        "canonical": "oklch(49.7% 0.114 151.1)",
+        "tonalRamp": [
+          "oklch(15% 0.068 151.1)",
+          "oklch(25% 0.087 151.1)",
+          "oklch(35% 0.106 151.1)",
+          "oklch(45% 0.114 151.1)",
+          "oklch(58% 0.114 151.1)",
+          "oklch(70% 0.114 151.1)",
+          "oklch(82% 0.093 151.1)",
+          "oklch(95% 0.068 151.1)"
+        ]
+      },
+      "chalk": {
+        "role": "neutral",
+        "displayName": "Chalk",
+        "canonical": "oklch(95.8% 0.012 91.5)",
+        "tonalRamp": [
+          "oklch(15% 0.012 91.5)",
+          "oklch(25% 0.012 91.5)",
+          "oklch(35% 0.012 91.5)",
+          "oklch(45% 0.012 91.5)",
+          "oklch(58% 0.012 91.5)",
+          "oklch(70% 0.012 91.5)",
+          "oklch(82% 0.012 91.5)",
+          "oklch(95% 0.012 91.5)"
+        ]
+      },
+      "chalk-dim": {
+        "role": "neutral",
+        "displayName": "Dim Chalk",
+        "canonical": "oklch(83.7% 0.017 114.4)",
+        "tonalRamp": [
+          "oklch(15% 0.017 114.4)",
+          "oklch(25% 0.017 114.4)",
+          "oklch(35% 0.017 114.4)",
+          "oklch(45% 0.017 114.4)",
+          "oklch(58% 0.017 114.4)",
+          "oklch(70% 0.017 114.4)",
+          "oklch(82% 0.017 114.4)",
+          "oklch(95% 0.017 114.4)"
+        ]
+      },
+      "ground": {
+        "role": "neutral",
+        "displayName": "Stall Ground",
+        "canonical": "oklch(96.2% 0.006 128.5)",
+        "tonalRamp": [
+          "oklch(15% 0.006 128.5)",
+          "oklch(25% 0.006 128.5)",
+          "oklch(35% 0.006 128.5)",
+          "oklch(45% 0.006 128.5)",
+          "oklch(58% 0.006 128.5)",
+          "oklch(70% 0.006 128.5)",
+          "oklch(82% 0.006 128.5)",
+          "oklch(95% 0.006 128.5)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Surface White",
+        "canonical": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "oklch(15% 0.000 89.9)",
+          "oklch(25% 0.000 89.9)",
+          "oklch(35% 0.000 89.9)",
+          "oklch(45% 0.000 89.9)",
+          "oklch(58% 0.000 89.9)",
+          "oklch(70% 0.000 89.9)",
+          "oklch(82% 0.000 89.9)",
+          "oklch(95% 0.000 89.9)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(21.2% 0.008 153.2)",
+        "tonalRamp": [
+          "oklch(15% 0.008 153.2)",
+          "oklch(25% 0.008 153.2)",
+          "oklch(35% 0.008 153.2)",
+          "oklch(45% 0.008 153.2)",
+          "oklch(58% 0.008 153.2)",
+          "oklch(70% 0.008 153.2)",
+          "oklch(82% 0.008 153.2)",
+          "oklch(95% 0.008 153.2)"
+        ]
+      },
+      "ink-muted": {
+        "role": "neutral",
+        "displayName": "Muted Ink",
+        "canonical": "oklch(42.7% 0.012 154.8)",
+        "tonalRamp": [
+          "oklch(15% 0.012 154.8)",
+          "oklch(25% 0.012 154.8)",
+          "oklch(35% 0.012 154.8)",
+          "oklch(45% 0.012 154.8)",
+          "oklch(58% 0.012 154.8)",
+          "oklch(70% 0.012 154.8)",
+          "oklch(82% 0.012 154.8)",
+          "oklch(95% 0.012 154.8)"
+        ]
+      },
+      "tomato-text": {
+        "role": "secondary",
+        "displayName": "Error Tomato",
+        "canonical": "oklch(50.5% 0.168 32.2)",
+        "tonalRamp": [
+          "oklch(15% 0.086 32.2)",
+          "oklch(25% 0.114 32.2)",
+          "oklch(35% 0.142 32.2)",
+          "oklch(45% 0.168 32.2)",
+          "oklch(58% 0.168 32.2)",
+          "oklch(70% 0.156 32.2)",
+          "oklch(82% 0.122 32.2)",
+          "oklch(95% 0.086 32.2)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Line",
+        "canonical": "rgba(22, 26, 23, 0.14)",
+        "tonalRamp": [
+          "rgba(22, 26, 23, 0.6)",
+          "rgba(22, 26, 23, 0.45)",
+          "rgba(22, 26, 23, 0.3)",
+          "rgba(22, 26, 23, 0.2)",
+          "rgba(22, 26, 23, 0.14)",
+          "rgba(22, 26, 23, 0.12)",
+          "rgba(22, 26, 23, 0.08)",
+          "rgba(22, 26, 23, 0.04)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Board Sign",
+        "purpose": "The board hero headline only; uppercase, balanced."
+      },
+      "headline": {
+        "displayName": "Section Sign",
+        "purpose": "Section, quick-view, journal and auth titles."
+      },
+      "title": {
+        "displayName": "Small Sign",
+        "purpose": "Wordmark, drawer head, featured name, empty-bag and total signs."
+      },
+      "price": {
+        "displayName": "Price Sign",
+        "purpose": "Painted price chips and the bag total; tabular figures."
+      },
+      "crate-label": {
+        "displayName": "Crate Label",
+        "purpose": "Crate filter tabs."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running copy, 40-46ch measures."
+      },
+      "item-name": {
+        "displayName": "Item Name",
+        "purpose": "Product names in the grid and bag."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Buttons, nav, bag pill."
+      },
+      "tag": {
+        "displayName": "Tag",
+        "purpose": "Uppercase product tags pinned on images."
+      }
+    },
+    "shadows": [
+      {
+        "name": "drawer-edge",
+        "value": "-12px 0 40px rgba(24, 35, 29, .25)",
+        "purpose": "Bag drawer only, separating it from the page it slides over."
+      },
+      {
+        "name": "in-flight",
+        "value": "0 8px 20px rgba(24, 35, 29, .3)",
+        "purpose": "The transient thumbnail flying into the bag after an add (650ms)."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The single system easing for panels, dialogs, toasts, bumps and card settle."
+      },
+      {
+        "name": "ease-flight",
+        "value": "cubic-bezier(.2,.7,.2,1)",
+        "purpose": "The add-to-bag flight arc."
+      },
+      {
+        "name": "duration-state",
+        "value": "200ms",
+        "purpose": "Colour and fill changes on controls."
+      },
+      {
+        "name": "duration-panel",
+        "value": "350ms",
+        "purpose": "Drawer slide and dialog rise (toast 400ms, scrim 300ms)."
+      },
+      {
+        "name": "duration-settle",
+        "value": "450ms",
+        "purpose": "Product cards settling in from 10px below."
+      },
+      {
+        "name": "duration-bump",
+        "value": "500ms",
+        "purpose": "Bag count bump to 1.35 scale."
+      },
+      {
+        "name": "duration-flight",
+        "value": "650ms",
+        "purpose": "Thumbnail flight into the bag."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone",
+        "value": "640px"
+      },
+      {
+        "name": "tablet",
+        "value": "1000px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Sign Button",
+      "kind": "button",
+      "refersTo": "button-sign",
+      "description": "Primary call to action: mustard pill with ink text.",
+      "html": "<button class=\"ds-btn-sign\">Shop the stall <svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></button>",
+      "css": ".ds-btn-sign { display:inline-flex; align-items:center; gap:10px; min-height:48px; padding:0 22px; border:0; border-radius:999px; background:#eab12b; color:#161a17; font:600 15px/1 Figtree, system-ui, sans-serif; cursor:pointer; transition:background-color .2s, transform .2s cubic-bezier(0.16,1,0.3,1); } .ds-btn-sign:hover { background:#f4c449; } .ds-btn-sign:active { transform:scale(.97); } .ds-btn-sign:focus-visible { outline:3px solid #2c59c9; outline-offset:3px; }"
+    },
+    {
+      "name": "Board Button",
+      "kind": "button",
+      "refersTo": "button-board",
+      "description": "Dark pill used on crate or light grounds (featured product, checkout).",
+      "html": "<button class=\"ds-btn-board\">Checkout</button>",
+      "css": ".ds-btn-board { display:inline-flex; align-items:center; gap:10px; min-height:48px; padding:0 22px; border:0; border-radius:999px; background:#18231d; color:#f4f1e8; font:600 15px/1 Figtree, system-ui, sans-serif; cursor:pointer; transition:background-color .2s, transform .2s cubic-bezier(0.16,1,0.3,1); } .ds-btn-board:hover { background:#233229; } .ds-btn-board:active { transform:scale(.97); } .ds-btn-board:focus-visible { outline:3px solid #2c59c9; outline-offset:3px; }"
+    },
+    {
+      "name": "Add Button",
+      "kind": "button",
+      "refersTo": "button-add",
+      "description": "Outlined ink pill under each product; fills ink on hover.",
+      "html": "<button class=\"ds-btn-add\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\"><path d=\"M12 5v14M5 12h14\"/></svg> Add to bag</button>",
+      "css": ".ds-btn-add { display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:48px; padding:0 22px; border:2px solid #161a17; border-radius:999px; background:transparent; color:#161a17; font:600 15px/1 Figtree, system-ui, sans-serif; cursor:pointer; transition:background-color .2s, color .2s, transform .2s cubic-bezier(0.16,1,0.3,1); } .ds-btn-add:hover { background:#161a17; color:#f4f1e8; } .ds-btn-add:active { transform:scale(.97); } .ds-btn-add:focus-visible { outline:3px solid #2c59c9; outline-offset:3px; }"
+    },
+    {
+      "name": "Crate Tab",
+      "kind": "chip",
+      "refersTo": "crate-tab",
+      "description": "Category filter pill outlined in its crate colour; fills when selected.",
+      "html": "<div class=\"ds-crates\"><button class=\"ds-crate\" style=\"--crate:#cf3b20;--crate-ink:#fff\" aria-pressed=\"true\">Kitchen <span>2</span></button><button class=\"ds-crate\" style=\"--crate:#eab12b;--crate-ink:#161a17\" aria-pressed=\"false\">Candlelight <span>2</span></button><button class=\"ds-crate\" style=\"--crate:#2c59c9;--crate-ink:#fff\" aria-pressed=\"false\">Desk <span>1</span></button></div>",
+      "css": ".ds-crates { display:flex; flex-wrap:wrap; gap:8px; } .ds-crate { display:inline-flex; align-items:center; gap:10px; min-height:46px; padding:0 10px 0 18px; border-radius:999px; border:2px solid var(--crate); background:#fff; color:#161a17; font:800 19px/1 'Big Shoulders Display', 'Arial Narrow', sans-serif; text-transform:uppercase; letter-spacing:.03em; cursor:pointer; transition:background-color .2s, color .2s, transform .2s cubic-bezier(0.16,1,0.3,1); } .ds-crate span { min-width:26px; height:26px; border-radius:999px; display:grid; place-items:center; background:var(--crate); color:var(--crate-ink); font:700 13px/1 Figtree, system-ui, sans-serif; } .ds-crate:hover { transform:translateY(-2px); } .ds-crate[aria-pressed=true] { background:var(--crate); color:var(--crate-ink); } .ds-crate[aria-pressed=true] span { background:#fff; color:#161a17; } .ds-crate:focus-visible { outline:3px solid #2c59c9; outline-offset:3px; }"
+    },
+    {
+      "name": "Price Sign",
+      "kind": "custom",
+      "refersTo": "price-sign",
+      "description": "Painted board chip with a raised mustard dollar; always on the goods.",
+      "html": "<span class=\"ds-price\">38</span> <span class=\"ds-price ds-price-lg\">124</span>",
+      "css": ".ds-price { display:inline-flex; align-items:flex-start; gap:1px; background:#18231d; color:#f4f1e8; font:800 30px/1 'Big Shoulders Display', 'Arial Narrow', sans-serif; padding:6px 12px 6px 10px; border-radius:6px; font-variant-numeric:tabular-nums; } .ds-price::before { content:'$'; font-size:.55em; color:#eab12b; margin-top:.1em; } .ds-price-lg { font-size:48px; padding:8px 16px 8px 14px; }"
+    },
+    {
+      "name": "Product Card",
+      "kind": "card",
+      "refersTo": "product-card",
+      "description": "Image matted in its crate colour, with tag, price sign, name, material and Add button.",
+      "html": "<article class=\"ds-card\" style=\"--crate:#cf3b20\"><div class=\"ds-card-media\"><div class=\"ds-card-img\"></div><span class=\"ds-card-tag\">New</span><span class=\"ds-card-price\">38</span></div><h3>Stoneware pour-over</h3><p><i></i>Glazed stoneware</p><button>Add to bag</button></article>",
+      "css": ".ds-card { width:240px; display:flex; flex-direction:column; gap:14px; font:400 16px/1.55 Figtree, system-ui, sans-serif; color:#161a17; } .ds-card-media { position:relative; background:var(--crate); padding:10px; border-radius:14px; } .ds-card-img { aspect-ratio:1; border-radius:6px; background:#e7e3d8; transition:transform .6s cubic-bezier(0.16,1,0.3,1); } .ds-card-media:hover .ds-card-img { transform:scale(1.03); } .ds-card-tag { position:absolute; top:20px; left:20px; background:#f4f1e8; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; padding:5px 10px; border-radius:999px; } .ds-card-price { position:absolute; right:20px; bottom:20px; background:#18231d; color:#f4f1e8; font:800 30px/1 'Big Shoulders Display', sans-serif; padding:6px 12px 6px 10px; border-radius:6px; } .ds-card-price::before { content:'$'; font-size:.55em; color:#eab12b; } .ds-card h3 { margin:0; font-size:18px; font-weight:600; line-height:1.3; } .ds-card p { margin:-10px 0 0; display:flex; gap:8px; align-items:center; color:#4a514c; font-size:14px; } .ds-card p i { width:10px; height:10px; border-radius:3px; background:var(--crate); } .ds-card button { min-height:48px; border:2px solid #161a17; border-radius:999px; background:none; font:600 15px Figtree, sans-serif; cursor:pointer; transition:background-color .2s, color .2s; } .ds-card button:hover { background:#161a17; color:#f4f1e8; } .ds-card button:focus-visible { outline:3px solid #2c59c9; outline-offset:3px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input-text",
+      "description": "Email field: 2px line border, blue border on focus, tomato on error.",
+      "html": "<label class=\"ds-field\"><span>Email</span><input type=\"email\" placeholder=\"you@example.com\"></label>",
+      "css": ".ds-field { display:flex; flex-direction:column; gap:8px; width:300px; font:400 16px/1.55 Figtree, system-ui, sans-serif; color:#161a17; } .ds-field span { font-weight:600; font-size:14px; } .ds-field input { min-height:50px; padding:0 16px; border-radius:12px; border:2px solid rgba(22,26,23,.14); background:#fff; font:inherit; caret-color:#cf3b20; } .ds-field input::placeholder { color:#6c726d; } .ds-field input:hover { border-color:#4a514c; } .ds-field input:focus-visible { outline:none; border-color:#2c59c9; } .ds-field input[aria-invalid=true] { border-color:#cf3b20; }"
+    },
+    {
+      "name": "Header with Bag Pill",
+      "kind": "nav",
+      "refersTo": "site-header",
+      "description": "Board header: wordmark, dim-chalk nav pills, chalk bag pill pinned right.",
+      "html": "<header class=\"ds-header\"><a class=\"ds-wordmark\" href=\"#\">Morrow<span>Goods</span></a><nav><a href=\"#\">Shop all</a><a href=\"#\">Kitchen</a><a href=\"#\">Journal</a></nav><button class=\"ds-bag\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linejoin=\"round\"><path d=\"M5 8h14l-1.2 12.1a1 1 0 0 1-1 .9H7.2a1 1 0 0 1-1-.9L5 8Z\"/><path d=\"M9 10V6.5a3 3 0 0 1 6 0V10\"/></svg>Bag<b>2</b></button></header>",
+      "css": ".ds-header { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:32px; height:68px; padding:0 24px; background:#18231d; color:#f4f1e8; font-family:Figtree, system-ui, sans-serif; } .ds-wordmark { font:800 28px/1 'Big Shoulders Display', 'Arial Narrow', sans-serif; text-transform:uppercase; letter-spacing:.01em; text-decoration:none; color:inherit; display:inline-flex; gap:6px; } .ds-wordmark span { color:#eab12b; } .ds-header nav { display:flex; gap:6px; } .ds-header nav a { text-decoration:none; font-size:15px; font-weight:500; padding:8px 14px; border-radius:999px; color:#c9cbbf; transition:color .2s, background-color .2s; } .ds-header nav a:hover { color:#f4f1e8; background:#233229; } .ds-header a:focus-visible, .ds-bag:focus-visible { outline:3px solid #eab12b; outline-offset:3px; } .ds-bag { display:inline-flex; align-items:center; gap:8px; height:44px; padding:0 8px 0 16px; border:0; border-radius:999px; background:#f4f1e8; color:#161a17; font:600 15px Figtree, sans-serif; cursor:pointer; transition:background-color .2s; } .ds-bag:hover { background:#fff; } .ds-bag b { min-width:28px; height:28px; padding:0 8px; border-radius:999px; background:#eab12b; display:grid; place-items:center; font-weight:700; font-variant-numeric:tabular-nums; }"
+    },
+    {
+      "name": "Toast",
+      "kind": "custom",
+      "refersTo": "toast",
+      "description": "Board pill confirmation with a mustard action.",
+      "html": "<div class=\"ds-toast\">Stoneware pour-over added <button>View bag</button></div>",
+      "css": ".ds-toast { display:inline-flex; align-items:center; gap:16px; padding:12px 12px 12px 20px; border-radius:999px; background:#18231d; color:#f4f1e8; font:400 15px Figtree, system-ui, sans-serif; } .ds-toast button { min-height:36px; padding:0 14px; border:0; border-radius:999px; background:#eab12b; color:#161a17; font:700 14px Figtree, sans-serif; cursor:pointer; } .ds-toast button:focus-visible { outline:3px solid #eab12b; outline-offset:3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Market Stall",
+    "overview": "A market stall, not a magazine. The goods are out on the table from the first screen, sorted into coloured crates and priced with big painted signs. A deep green-black sign board frames the stall at the top and bottom; between them, an off-white stall ground holds product cards whose frames are solid crate colour. Everything is flat: colour fields do the work that shadows and gradients do elsewhere, in the manner of Du Bois's data posters, where saturated flat colour is total and unapologetic.\n\nDensity is generous but busy in the way a stall is busy: prices are always visible on the goods, category is always visible as colour, and the bag is always reachable top-right. Type has two voices only: condensed, uppercase, heavy sign lettering for anything that is shouted (headlines, prices, crate names, totals), and a friendly humanist sans for everything that is read or operated.\n\nThe world explicitly rejects the cream background and editorial serif hero that preceded it, which pushed the catalog below the fold.",
+    "keyCharacteristics": [
+      "Green-black sign board for header, hero band, drawer head and footer.",
+      "One flat crate colour per category, owning whole regions (card frames, filter tabs, filtered headers, thumbnails).",
+      "Painted price signs: dark board chips with a mustard dollar sign, set in the sign face.",
+      "Pill-shaped controls everywhere; softly rounded crates; tight 6px corners on signs and images.",
+      "Flat at rest. Depth appears only on things that physically move over the page: the bag drawer and the item flying into the bag."
+    ],
+    "rules": [
+      {
+        "name": "The One Crate, One Colour Rule",
+        "body": "A category is identified by its crate colour everywhere it appears: card frame, filter tab border and fill, filtered shop header, crate dot, cart thumbnail, quick-view media panel. Never introduce a second colour for a category, and never use a crate colour for a different category.",
+        "section": "colors"
+      },
+      {
+        "name": "The Flat Field Rule",
+        "body": "Crate colours are applied at full strength as solid fields. No gradients, no tints, no translucent washes of a crate colour.",
+        "section": "colors"
+      },
+      {
+        "name": "The Mustard Takes Ink Rule",
+        "body": "Text on mustard is always ink; text on tomato, blue and leaf is always white; text on the board is chalk.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Voices Rule",
+        "body": "Big Shoulders is always uppercase and always 800 or heavier; it is for signs, prices and totals, never for paragraphs or controls other than the crate tabs. Everything read or operated is Figtree.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular Money Rule",
+        "body": "Every price, total and count uses tabular figures so numbers do not jitter as the bag changes.",
+        "section": "typography"
+      },
+      {
+        "name": "The Only Things That Move Get Shadows Rule",
+        "body": "No resting component carries a shadow. A shadow is allowed only on a surface that is physically travelling over the page (the drawer, the flying thumbnail).",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do give every category exactly one crate colour and use it as a solid field wherever that category shows up.",
+      "Do put the price on the goods, as a board price sign with a mustard dollar, in tabular figures.",
+      "Do set signs, prices and totals in Big Shoulders Display, uppercase, 800–900, with tight leading (0.88–1).",
+      "Do keep controls as full pills (999px) at 44px minimum height, and frame images in crate-colour mats with 6px inner corners.",
+      "Do use ink on mustard and white on tomato, blue and leaf.",
+      "Do keep the bag pill pinned top-right at every width."
+    ],
+    "donts": [
+      "Don't use gradients, tints or translucent washes of crate colours.",
+      "Don't put shadows on resting cards, buttons or bands; shadows belong only to the drawer and the in-flight thumbnail.",
+      "Don't set paragraphs or most controls in Big Shoulders, or set it in lowercase.",
+      "Don't return to a cream ground or an editorial serif hero that pushes products below the fold."
+    ]
+  }
+}
