@@ -2,6 +2,18 @@
 
 Express + TypeScript API for Morrow Goods. For the overall product purpose see [`../PRODUCT.md`](../PRODUCT.md). For visual design (if building email templates or error pages) see [`../DESIGN.md`](../DESIGN.md).
 
+## Project structure
+
+```text
+src/
+├── config/       # environment validation and application configuration
+├── controllers/  # request handlers and application logic
+├── lib/          # shared infrastructure, including the database client
+├── routes/       # endpoint declarations
+├── services/     # integrations such as email delivery
+└── server.ts     # application composition and startup
+```
+
 ## Setup
 
 ```bash
@@ -28,7 +40,8 @@ See `.env.example` for the full list. Key ones:
 | `FRONTEND_URL` | Where to redirect after OAuth (e.g. `http://localhost:3000`) |
 | `GOOGLE_REDIRECT_URI` | Must match the URI registered in Google Cloud Console |
 | `SESSION_SECRET` | Long random string; signs the `morrow_session` cookie |
-| `SUPABASE_DATABASE_CONNECTION_STRING` | Full Postgres connection string |
+| `SUPABASE_DATABASE_CONNECTION_STRING` | Postgres URL; its `[YOUR-PASSWORD]` token is replaced with `SUPABASE_DATABASE_PASSWORD` |
+| `DATABASE_URL` | Optional complete Postgres URL for Prisma CLI commands |
 | `BREVO_API_KEY` | Sends the welcome email on first sign-in |
 
 ## API routes
@@ -50,7 +63,7 @@ See `.env.example` for the full list. Key ones:
 
 ## Database
 
-Postgres via `pg` (Supabase). The `public.users` table is created automatically on startup. Schema:
+Postgres via Prisma (Supabase). The schema is defined in `prisma/schema.prisma`; migrations are intentionally not applied automatically. The models are `User`, `Product`, `Cart`, and `CartItem`.
 
 ```sql
 google_id        text  primary key

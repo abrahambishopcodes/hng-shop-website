@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ProductCategory {
+  kitchen
+  candlelight
+  desk
+  linen
+}
+
+model User {
+  googleId     String   @id @map("google_id")
+  email        String   @unique
+  fullName     String   @map("full_name")
+  avatarUrl    String?  @map("avatar_url")
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  lastSignInAt DateTime @default(now()) @map("last_sign_in_at") @db.Timestamptz(6)
+  cart         Cart?
+
+  @@map("users")
+}
+
+model Product {
+  id          Int             @id
+  name        String
+  category    ProductCategory
+  material    String
+  price       Decimal         @db.Decimal(10, 2)
+  tag         String?
+  description String
+  imageUrl    String          @map("image_url")
+  createdAt   DateTime        @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime        @updatedAt @map("updated_at") @db.Timestamptz(6)
+  cartItems   CartItem[]
+
+  @@index([category])
+  @@map("products")
+}
+
+model Cart {
+  id        String     @id @default(uuid()) @db.Uuid
+  userId    String     @unique @map("user_id")
+  user      User       @relation(fields: [userId], references: [googleId], onDelete: Cascade)
+  items     CartItem[]
+  createdAt DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime   @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@map("carts")
+}
+
+model CartItem {
+  id        String   @id @default(uuid()) @db.Uuid
+  cartId    String   @map("cart_id") @db.Uuid
+  productId Int      @map("product_id")
+  quantity  Int      @default(1)
+  cart      Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Restrict)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@unique([cartId, productId])
+  @@index([productId])
+  @@map("cart_items")
+}
