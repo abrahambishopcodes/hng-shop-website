@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import 'dotenv/config';
 import { defineConfig } from 'prisma/config';
 
@@ -9,12 +10,16 @@ if (!databaseUrl) {
   throw new Error('Set DATABASE_URL or SUPABASE_DATABASE_CONNECTION_STRING before running Prisma commands.');
 }
 
+const urlWithSsl = databaseUrl.includes('sslmode=')
+  ? databaseUrl
+  : `${databaseUrl}${databaseUrl.includes('?') ? '&' : '?'}sslmode=require`;
+
 export default defineConfig({
   schema: 'prisma/schema.prisma',
   migrations: {
     path: 'prisma/migrations',
   },
   datasource: {
-    url: databaseUrl,
+    url: urlWithSsl,
   },
 });
