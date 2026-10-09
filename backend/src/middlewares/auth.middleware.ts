@@ -73,8 +73,13 @@ export async function authenticate(request: Request, response: Response, next: N
       select: { id: true, role: true, isActive: true },
     });
 
-    if (!user || !user.isActive) {
+    if (!user) {
       response.status(401).json({ message: 'Authentication is required.' });
+      return;
+    }
+
+    if (!user.isActive) {
+      response.status(403).json({ message: 'Your account has been deactivated.' });
       return;
     }
 
