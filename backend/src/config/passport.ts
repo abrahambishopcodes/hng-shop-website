@@ -12,7 +12,7 @@ export interface AuthenticatedGoogleUser {
   isNew: boolean;
 }
 
-const callbackURL = env.googleRedirectUri || `http://localhost:${env.port}/auth/google/callback`;
+const callbackURL = env.googleRedirectUri || `http://localhost:${env.port}/api/v1/auth/google/callback`;
 
 passport.use(new GoogleStrategy(
   {

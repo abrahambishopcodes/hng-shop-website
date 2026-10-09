@@ -11,6 +11,6 @@ app.use(cors({ origin: env.frontendUrl, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(passport.initialize());
-app.use(authRouter);
+app.use('/api/v1', authRouter);
 
 app.listen(env.port, () => console.log(`Morrow Goods backend running at http://localhost:${env.port}`));

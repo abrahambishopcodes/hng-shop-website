@@ -1,21 +1,13 @@
 import crypto from 'node:crypto';
 import bcrypt from 'bcrypt';
 import type { Request, Response } from 'express';
-import { z } from 'zod';
+import type { z } from 'zod';
 import { env } from '../config/environment.js';
 import type { AuthenticatedGoogleUser } from '../config/passport.js';
 import { createAccessToken, createRefreshToken, readRefreshToken } from '../middlewares/auth.middleware.js';
 import { prisma } from '../lib/db.js';
+import type { loginSchema, signUpSchema } from '../schemas/auth.schemas.js';
 import { sendWelcomeEmail } from '../services/email.service.js';
-
-const credentialsSchema = z.object({
-  email: z.string().trim().email().max(320).transform((email) => email.toLowerCase()),
-  password: z.string().min(8).max(128),
-});
-
-const signUpSchema = credentialsSchema.extend({
-  fullName: z.string().trim().min(1).max(120),
-});
 
 function setSession(response: Response, user: object): void {
   const payload = Buffer.from(JSON.stringify({ user, exp: Date.now() + 1000 * 60 * 60 * 24 * 7 })).toString('base64url');
@@ -61,25 +53,17 @@ function sendTokenResponse(response: Response, user: { id: string; fullName: str
 }
 
 export async function signUp(request: Request, response: Response): Promise<void> {
-  const result = signUpSchema.safeParse(request.body);
-  if (!result.success) {
-    response.status(400).json({ message: 'Enter a valid name, email address, and password of at least 8 characters.' });
-    return;
-  }
+  const { fullName, email, password } = request.body as z.infer<typeof signUpSchema>;
 
   try {
-    const existingUser = await prisma.user.findUnique({ where: { email: result.data.email } });
+    const existingUser = await prisma.user.findUnique({ where: { email } });
     if (existingUser) {
       response.status(409).json({ message: 'An account with that email already exists.' });
       return;
     }
 
     const user = await prisma.user.create({
-      data: {
-        fullName: result.data.fullName,
-        email: result.data.email,
-        passwordHash: await bcrypt.hash(result.data.password, 12),
-      },
+      data: { fullName, email, passwordHash: await bcrypt.hash(password, 12) },
     });
 
     sendTokenResponse(response, user, 201);
@@ -90,16 +74,12 @@ export async function signUp(request: Request, response: Response): Promise<void
 }
 
 export async function login(request: Request, response: Response): Promise<void> {
-  const result = credentialsSchema.safeParse(request.body);
-  if (!result.success) {
-    response.status(400).json({ message: 'Enter a valid email address and password.' });
-    return;
-  }
+  const { email, password } = request.body as z.infer<typeof loginSchema>;
 
   try {
-    const user = await prisma.user.findUnique({ where: { email: result.data.email } });
+    const user = await prisma.user.findUnique({ where: { email } });
     const passwordIsValid = user?.passwordHash
-      ? await bcrypt.compare(result.data.password, user.passwordHash)
+      ? await bcrypt.compare(password, user.passwordHash)
       : false;
 
     if (!user || !passwordIsValid) {
