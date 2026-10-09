@@ -14,8 +14,8 @@
   --blue: #2c59c9;
   --leaf: #23743f;
 
-  --sign: "Big Shoulders Display", "Arial Narrow", sans-serif;
-  --sans: "Figtree", system-ui, sans-serif;
+  --sign: var(--font-big-shoulders), "Arial Narrow", sans-serif;
+  --sans: var(--font-figtree), system-ui, sans-serif;
 
   --gutter: clamp(16px, 4vw, 56px);
   --header-h: 68px;
@@ -23,7 +23,6 @@
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Crate colours: each category owns one flat colour */
 .crate-all { --crate: var(--board); --crate-ink: var(--chalk); }
 .crate-kitchen { --crate: var(--tomato); --crate-ink: #fff; }
 .crate-candlelight { --crate: var(--mustard); --crate-ink: var(--ink); }
@@ -71,7 +70,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 .announcement-close:hover { background: rgba(22, 26, 23, .12); }
 .announcement-close .icon { width: 16px; height: 16px; }
 
-/* ---------- Header (sticky, bag always top-right) ---------- */
+/* ---------- Header ---------- */
 .site-header { position: sticky; top: 0; z-index: 40; height: var(--header-h); display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 32px; padding: 0 var(--gutter); background: var(--board); color: var(--chalk); }
 .wordmark { font: 800 28px/1 var(--sign); text-transform: uppercase; letter-spacing: .01em; text-decoration: none; display: inline-flex; gap: 6px; }
 .wordmark span { color: var(--mustard); }
@@ -110,7 +109,6 @@ ul { list-style: none; margin: 0; padding: 0; }
 .feature .button { margin-top: auto; width: 100%; background: var(--board); color: var(--chalk); }
 .feature .button:hover { background: var(--board-2); }
 
-/* Painted price sign */
 .price-sign { display: inline-flex; align-items: flex-start; gap: 1px; background: var(--board); color: var(--chalk); font: 800 30px/1 var(--sign); padding: 6px 12px 6px 10px; border-radius: 6px; font-variant-numeric: tabular-nums; }
 .price-sign::before { content: "$"; font-size: .55em; color: var(--mustard); margin-top: .1em; }
 .price-sign-lg { font-size: 48px; padding: 8px 16px 8px 14px; }
@@ -164,8 +162,8 @@ ul { list-style: none; margin: 0; padding: 0; }
 .site-footer li { display: inline-flex; align-items: center; gap: 8px; }
 
 /* ---------- Bag drawer ---------- */
-.scrim { position: fixed; inset: 0; z-index: 60; background: rgba(24, 35, 29, .55); opacity: 0; transition: opacity .3s; }
-.scrim.visible { opacity: 1; }
+.scrim { position: fixed; inset: 0; z-index: 60; background: rgba(24, 35, 29, .55); opacity: 0; transition: opacity .3s; pointer-events: none; }
+.scrim.visible { opacity: 1; pointer-events: auto; }
 .cart-panel { position: fixed; z-index: 70; top: 0; right: 0; bottom: 0; width: min(440px, 100%); background: var(--ground); display: flex; flex-direction: column; box-shadow: -12px 0 40px rgba(24, 35, 29, .25); transform: translateX(100%); transition: transform .35s var(--ease-out); }
 .cart-panel.open { transform: none; }
 .panel-head { height: var(--header-h); flex: none; display: flex; align-items: center; justify-content: space-between; padding: 0 12px 0 24px; background: var(--board); color: var(--chalk); }
@@ -197,7 +195,6 @@ ul { list-style: none; margin: 0; padding: 0; }
 .cart-footer dd { margin: 0; font: 800 32px/1 var(--sign); font-variant-numeric: tabular-nums; }
 .cart-footer p { font-size: 13px; color: var(--ink-2); margin: 4px 0 16px; }
 
-/* Quantity stepper */
 .stepper { display: inline-flex; align-items: center; border: 2px solid var(--line); border-radius: 999px; height: 48px; }
 .stepper button { width: 44px; height: 100%; display: grid; place-items: center; border-radius: 999px; }
 .stepper button:hover { background: var(--line); }

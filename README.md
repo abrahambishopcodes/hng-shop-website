@@ -1,27 +1,54 @@
 # Morrow Goods
 
-## Google OAuth setup
+A full-stack market-stall storefront. See [`PRODUCT.md`](./PRODUCT.md) for what it is and [`DESIGN.md`](./DESIGN.md) for the complete visual language shared across all platforms.
 
-1. In Google Cloud Console, create a **Web application** OAuth client.
-2. Add `http://localhost:3000` to **Authorized JavaScript origins**.
-3. Add `http://localhost:3000/auth/google/callback` to **Authorized redirect URIs**.
-4. Complete `.env` using `.env.example` as a reference. Keep this file private and never commit it.
-5. Run `npm start`, then open `http://localhost:3000`.
+## Structure
 
-For deployment, update `GOOGLE_REDIRECT_URI` and add the exact production origin and `/auth/google/callback` URL to the OAuth client. Set `NODE_ENV=production` so the signed session cookie is HTTPS-only.
-
-## Brevo welcome emails
-
-After a customer signs in with Google for the first time, the server sends a transactional welcome email through Brevo. Configure these server-only environment variables:
-
-```env
-BREVO_API_KEY=...
-EMAIL_FROM=hello@example.com
-EMAIL_FROM_NAME="Morrow Goods"
+```
+hng-shop-website/
+├── backend/   Express + TypeScript API (OAuth, sessions, DB, email)
+├── web-fe/    Next.js + React frontend
+├── app/       Mobile app (planned)
+├── DESIGN.md  Single source of truth for colours, type, spacing and components
+└── PRODUCT.md Product purpose, platforms and principles
 ```
 
-`EMAIL_FROM` must be a verified Brevo sender. The API key is never exposed to the browser.
+## Quick start
 
-## User persistence with Supabase
+**First-time setup** (once per machine):
 
-The server uses `SUPABASE_DATABASE_CONNECTION_STRING` to connect directly to Postgres and creates `public.users` automatically at startup. After Google verifies a profile, the server upserts its Google subject ID, verified email, display name, avatar URL, and last sign-in time. Keep both Supabase environment values server-only.
+```bash
+# 1. Fill in env files
+cp backend/.env.example backend/.env       # add your secrets
+cp web-fe/.env.local.example web-fe/.env.local
+
+# 2. Install all dependencies
+npm install                 # root (concurrently)
+npm install --prefix backend
+npm install --prefix web-fe
+```
+
+**Start everything:**
+
+```bash
+npm run dev
+```
+
+This spins up both services in one terminal — backend on `:3001`, web on `:3000` — with labelled, colour-coded output. `Ctrl+C` stops both. Open `http://localhost:3000`.
+
+## Environment variables
+
+Each sub-project keeps its own env file — see the `.env.example` / `.env.local.example` inside each directory for what's needed and why.
+
+## OAuth setup
+
+1. In Google Cloud Console create a **Web application** OAuth client.
+2. Add `http://localhost:3001` to **Authorized JavaScript origins**.
+3. Add `http://localhost:3001/auth/google/callback` to **Authorized redirect URIs**.
+4. Fill in `backend/.env` with the client ID and secret.
+
+For production, update `GOOGLE_REDIRECT_URI` and `FRONTEND_URL` in `backend/.env`, add the production origin and callback URL to the OAuth client, and set `NODE_ENV=production`.
+
+## More detail
+
+Each sub-project has its own README with setup specifics, API contracts and component notes. All of them point back here for the overall picture.

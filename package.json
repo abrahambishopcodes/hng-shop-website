@@ -1,17 +1,10 @@
 {
   "name": "morrow-goods",
-  "version": "1.0.0",
   "private": true,
-  "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js"
+    "dev": "concurrently -n backend,web -c blue,green --kill-others-on-fail \"npm --prefix backend run dev\" \"npm --prefix web-fe run dev\""
   },
-  "dependencies": {
-    "cookie-parser": "^1.4.7",
-    "dotenv": "^16.6.1",
-    "express": "^5.1.0",
-    "google-auth-library": "^10.2.0",
-    "pg": "^8.16.3"
+  "devDependencies": {
+    "concurrently": "^9.1.2"
   }
 }

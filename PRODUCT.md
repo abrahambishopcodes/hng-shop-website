@@ -1,35 +1,37 @@
 # Product
 
-<!-- impeccable:product-schema 1 -->
+## Morrow Goods
 
-## Platform
+A market-stall storefront with a real backend and accounts — currently a demo, built to grow into a full-stack product across web and mobile.
 
-web
+## Platforms
 
-## Stack
+| Directory | Platform  | Status      |
+|-----------|-----------|-------------|
+| `web-fe`  | Web (Next.js + React) | Active |
+| `backend` | API (Express + TypeScript) | Active |
+| `app`     | Mobile (TBD) | Planned |
 
-delegated: a lightweight static HTML/CSS/JavaScript storefront was chosen because the project contains no existing scaffold and the requested experience is a UI prototype.
+All platforms share the same visual language defined in [`DESIGN.md`](./DESIGN.md). Any colour, typography, spacing or component decision that applies to both web and mobile lives there.
 
 ## Users
 
-Inferred from the request: shoppers browsing a small retail catalog, signing in to make the shopping experience feel personal, and collecting products in a cart before checkout.
+Shoppers browsing a small retail catalog, signing in for a persistent bag, and collecting products before checkout.
 
-## Product Purpose
+## Purpose
 
-Inferred from the request: demonstrate a complete shop interface, including account entry, product discovery, and cart management, using mock content rather than production commerce services.
+Demonstrate a complete shop interface — product discovery, cart management, and Google account entry — wired to a real backend (Supabase database, Google OAuth, Brevo email). Mock checkout only; no payment integration yet.
 
-## Capabilities and Constraints
+## Capabilities
 
-- An account/authentication screen with a Google sign-in affordance.
-- A product listing where products can be added to a cart.
-- Mock product and account data only; no real authentication, payments, checkout, or backend integration.
+- Google OAuth sign-in (real) with a Supabase-backed user record and a welcome email via Brevo.
+- Product browsing, filtering by category, sorting, quick-view.
+- Cart with a free-delivery meter, quantity controls and an undo-on-remove toast.
+- Session persistence via a signed HTTP-only cookie.
 
-## Evidence on Hand
+## Principles
 
-No brand assets, product photography, logo, catalog data, or existing application code were supplied.
-
-## Product Principles
-
-- Make the main shopping path legible immediately.
-- Treat mock behavior as convincingly interactive UI, never as a production claim.
-- Keep account and cart context visible without crowding browsing.
+- Show the goods immediately — the catalog is above the fold from the first load.
+- Treat mock behaviors (checkout) as clearly demo, never as production claims.
+- Keep bag and account visible without crowding browsing.
+- Design decisions made once in `DESIGN.md` flow to every platform without re-negotiation.
