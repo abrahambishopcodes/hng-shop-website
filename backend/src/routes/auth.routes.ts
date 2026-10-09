@@ -1,9 +1,18 @@
 import { Router } from 'express';
-import { getCurrentUser, handleGoogleCallback, logout, startGoogleAuthentication } from '../controllers/auth.controller.js';
+import { env } from '../config/environment.js';
+import { passport } from '../config/passport.js';
+import { getCurrentUser, handleGoogleCallback, logout } from '../controllers/auth.controller.js';
 
 export const authRouter = Router();
 
-authRouter.get('/auth/google', startGoogleAuthentication);
-authRouter.get('/auth/google/callback', handleGoogleCallback);
+authRouter.get('/auth/google', passport.authenticate('google', {
+  scope: ['openid', 'email', 'profile'],
+  prompt: 'select_account',
+  session: false,
+}));
+authRouter.get('/auth/google/callback', passport.authenticate('google', {
+  failureRedirect: `${env.frontendUrl}/?auth=failed`,
+  session: false,
+}), handleGoogleCallback);
 authRouter.get('/api/me', getCurrentUser);
 authRouter.post('/api/logout', logout);
