@@ -1,8 +1,21 @@
 import crypto from 'node:crypto';
+import bcrypt from 'bcrypt';
 import type { Request, Response } from 'express';
+import { z } from 'zod';
 import { env } from '../config/environment.js';
 import type { AuthenticatedGoogleUser } from '../config/passport.js';
+import { createAccessToken, createRefreshToken, readRefreshToken } from '../middlewares/auth.middleware.js';
+import { prisma } from '../lib/db.js';
 import { sendWelcomeEmail } from '../services/email.service.js';
+
+const credentialsSchema = z.object({
+  email: z.string().trim().email().max(320).transform((email) => email.toLowerCase()),
+  password: z.string().min(8).max(128),
+});
+
+const signUpSchema = credentialsSchema.extend({
+  fullName: z.string().trim().min(1).max(120),
+});
 
 function setSession(response: Response, user: object): void {
   const payload = Buffer.from(JSON.stringify({ user, exp: Date.now() + 1000 * 60 * 60 * 24 * 7 })).toString('base64url');
@@ -20,6 +33,115 @@ function readSession(token: string | undefined): object | null {
     return session.exp > Date.now() ? session.user : null;
   } catch {
     return null;
+  }
+}
+
+function setRefreshToken(response: Response, token: string): void {
+  response.cookie('morrow_refresh', token, {
+    httpOnly: true,
+    secure: env.isProduction,
+    sameSite: 'lax',
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+    path: '/',
+  });
+}
+
+function sendTokenResponse(response: Response, user: { id: string; fullName: string; email: string; role: 'Admin' | 'User'; avatarUrl: string | null }, status = 200): void {
+  setRefreshToken(response, createRefreshToken(user));
+  response.status(status).json({
+    accessToken: createAccessToken(user),
+    user: {
+      id: user.id,
+      fullName: user.fullName,
+      email: user.email,
+      role: user.role,
+      avatarUrl: user.avatarUrl,
+    },
+  });
+}
+
+export async function signUp(request: Request, response: Response): Promise<void> {
+  const result = signUpSchema.safeParse(request.body);
+  if (!result.success) {
+    response.status(400).json({ message: 'Enter a valid name, email address, and password of at least 8 characters.' });
+    return;
+  }
+
+  try {
+    const existingUser = await prisma.user.findUnique({ where: { email: result.data.email } });
+    if (existingUser) {
+      response.status(409).json({ message: 'An account with that email already exists.' });
+      return;
+    }
+
+    const user = await prisma.user.create({
+      data: {
+        fullName: result.data.fullName,
+        email: result.data.email,
+        passwordHash: await bcrypt.hash(result.data.password, 12),
+      },
+    });
+
+    sendTokenResponse(response, user, 201);
+  } catch (error) {
+    console.error('Sign-up failed:', (error as Error).message);
+    response.status(500).json({ message: 'Unable to create your account.' });
+  }
+}
+
+export async function login(request: Request, response: Response): Promise<void> {
+  const result = credentialsSchema.safeParse(request.body);
+  if (!result.success) {
+    response.status(400).json({ message: 'Enter a valid email address and password.' });
+    return;
+  }
+
+  try {
+    const user = await prisma.user.findUnique({ where: { email: result.data.email } });
+    const passwordIsValid = user?.passwordHash
+      ? await bcrypt.compare(result.data.password, user.passwordHash)
+      : false;
+
+    if (!user || !passwordIsValid) {
+      response.status(401).json({ message: 'Invalid email or password.' });
+      return;
+    }
+
+    if (!user.isActive) {
+      response.status(403).json({ message: 'This account is inactive.' });
+      return;
+    }
+
+    sendTokenResponse(response, user);
+  } catch (error) {
+    console.error('Login failed:', (error as Error).message);
+    response.status(500).json({ message: 'Unable to sign in.' });
+  }
+}
+
+export async function refreshAccessToken(request: Request, response: Response): Promise<void> {
+  const payload = readRefreshToken(request.cookies.morrow_refresh as string | undefined);
+  if (!payload) {
+    response.status(401).json({ message: 'A valid refresh token is required.' });
+    return;
+  }
+
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: payload.sub },
+      select: { id: true, fullName: true, email: true, role: true, avatarUrl: true, isActive: true },
+    });
+
+    if (!user || !user.isActive) {
+      response.status(401).json({ message: 'A valid refresh token is required.' });
+      return;
+    }
+
+    setRefreshToken(response, createRefreshToken(user));
+    response.json({ accessToken: createAccessToken(user) });
+  } catch (error) {
+    console.error('Token refresh failed:', (error as Error).message);
+    response.status(500).json({ message: 'Unable to refresh the access token.' });
   }
 }
 
@@ -45,5 +167,6 @@ export function getCurrentUser(request: Request, response: Response): void {
 
 export function logout(_request: Request, response: Response): void {
   response.clearCookie('morrow_session', { httpOnly: true, secure: env.isProduction, sameSite: 'lax', path: '/' });
+  response.clearCookie('morrow_refresh', { httpOnly: true, secure: env.isProduction, sameSite: 'lax', path: '/' });
   response.status(204).end();
 }

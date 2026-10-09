@@ -9,11 +9,17 @@
 * 🟢 You can import this file directly.
 */
 
-export const ProductCategory = {
-  kitchen: 'kitchen',
-  candlelight: 'candlelight',
-  desk: 'desk',
-  linen: 'linen'
+export const UserRole = {
+  Admin: 'Admin',
+  User: 'User'
 } as const
 
-export type ProductCategory = (typeof ProductCategory)[keyof typeof ProductCategory]
+export type UserRole = (typeof UserRole)[keyof typeof UserRole]
+
+
+export const SocialProvider = {
+  Google: 'Google',
+  facebook: 'facebook'
+} as const
+
+export type SocialProvider = (typeof SocialProvider)[keyof typeof SocialProvider]

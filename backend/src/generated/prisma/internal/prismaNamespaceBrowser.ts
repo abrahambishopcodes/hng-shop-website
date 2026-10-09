@@ -52,9 +52,7 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  Product: 'Product',
-  Cart: 'Cart',
-  CartItem: 'CartItem'
+  ConnectedSocial: 'ConnectedSocial'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -74,53 +72,30 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 
 export const UserScalarFieldEnum = {
-  googleId: 'googleId',
-  email: 'email',
+  id: 'id',
   fullName: 'fullName',
+  email: 'email',
+  passwordHash: 'passwordHash',
+  isActive: 'isActive',
+  role: 'role',
   avatarUrl: 'avatarUrl',
   createdAt: 'createdAt',
-  lastSignInAt: 'lastSignInAt'
+  updatedAt: 'updatedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-export const ProductScalarFieldEnum = {
+export const ConnectedSocialScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  category: 'category',
-  material: 'material',
-  price: 'price',
-  tag: 'tag',
-  description: 'description',
-  imageUrl: 'imageUrl',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
-
-
-export const CartScalarFieldEnum = {
-  id: 'id',
+  providerId: 'providerId',
+  providerName: 'providerName',
   userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
-export type CartScalarFieldEnum = (typeof CartScalarFieldEnum)[keyof typeof CartScalarFieldEnum]
-
-
-export const CartItemScalarFieldEnum = {
-  id: 'id',
-  cartId: 'cartId',
-  productId: 'productId',
-  quantity: 'quantity',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type CartItemScalarFieldEnum = (typeof CartItemScalarFieldEnum)[keyof typeof CartItemScalarFieldEnum]
+export type ConnectedSocialScalarFieldEnum = (typeof ConnectedSocialScalarFieldEnum)[keyof typeof ConnectedSocialScalarFieldEnum]
 
 
 export const SortOrder = {

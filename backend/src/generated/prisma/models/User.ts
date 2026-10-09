@@ -25,59 +25,77 @@ export type AggregateUser = {
 }
 
 export type UserMinAggregateOutputType = {
-  googleId: string | null
-  email: string | null
+  id: string | null
   fullName: string | null
+  email: string | null
+  passwordHash: string | null
+  isActive: boolean | null
+  role: $Enums.UserRole | null
   avatarUrl: string | null
   createdAt: Date | null
-  lastSignInAt: Date | null
+  updatedAt: Date | null
 }
 
 export type UserMaxAggregateOutputType = {
-  googleId: string | null
-  email: string | null
+  id: string | null
   fullName: string | null
+  email: string | null
+  passwordHash: string | null
+  isActive: boolean | null
+  role: $Enums.UserRole | null
   avatarUrl: string | null
   createdAt: Date | null
-  lastSignInAt: Date | null
+  updatedAt: Date | null
 }
 
 export type UserCountAggregateOutputType = {
-  googleId: number
-  email: number
+  id: number
   fullName: number
+  email: number
+  passwordHash: number
+  isActive: number
+  role: number
   avatarUrl: number
   createdAt: number
-  lastSignInAt: number
+  updatedAt: number
   _all: number
 }
 
 
 export type UserMinAggregateInputType = {
-  googleId?: true
-  email?: true
+  id?: true
   fullName?: true
+  email?: true
+  passwordHash?: true
+  isActive?: true
+  role?: true
   avatarUrl?: true
   createdAt?: true
-  lastSignInAt?: true
+  updatedAt?: true
 }
 
 export type UserMaxAggregateInputType = {
-  googleId?: true
-  email?: true
+  id?: true
   fullName?: true
+  email?: true
+  passwordHash?: true
+  isActive?: true
+  role?: true
   avatarUrl?: true
   createdAt?: true
-  lastSignInAt?: true
+  updatedAt?: true
 }
 
 export type UserCountAggregateInputType = {
-  googleId?: true
-  email?: true
+  id?: true
   fullName?: true
+  email?: true
+  passwordHash?: true
+  isActive?: true
+  role?: true
   avatarUrl?: true
   createdAt?: true
-  lastSignInAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -154,12 +172,15 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 }
 
 export type UserGroupByOutputType = {
-  googleId: string
-  email: string
+  id: string
   fullName: string
+  email: string
+  passwordHash: string | null
+  isActive: boolean
+  role: $Enums.UserRole
   avatarUrl: string | null
   createdAt: Date
-  lastSignInAt: Date
+  updatedAt: Date
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -184,45 +205,57 @@ export type UserWhereInput = {
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
-  googleId?: Prisma.StringFilter<"User"> | string
-  email?: Prisma.StringFilter<"User"> | string
+  id?: Prisma.UuidFilter<"User"> | string
   fullName?: Prisma.StringFilter<"User"> | string
+  email?: Prisma.StringFilter<"User"> | string
+  passwordHash?: Prisma.StringNullableFilter<"User"> | string | null
+  isActive?: Prisma.BoolFilter<"User"> | boolean
+  role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  lastSignInAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  cart?: Prisma.XOR<Prisma.CartNullableScalarRelationFilter, Prisma.CartWhereInput> | null
+  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  connectedSocials?: Prisma.ConnectedSocialListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
-  googleId?: Prisma.SortOrder
-  email?: Prisma.SortOrder
+  id?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrderInput | Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  lastSignInAt?: Prisma.SortOrder
-  cart?: Prisma.CartOrderByWithRelationInput
+  updatedAt?: Prisma.SortOrder
+  connectedSocials?: Prisma.ConnectedSocialOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
-  googleId?: string
+  id?: string
   email?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   fullName?: Prisma.StringFilter<"User"> | string
+  passwordHash?: Prisma.StringNullableFilter<"User"> | string | null
+  isActive?: Prisma.BoolFilter<"User"> | boolean
+  role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  lastSignInAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  cart?: Prisma.XOR<Prisma.CartNullableScalarRelationFilter, Prisma.CartWhereInput> | null
-}, "googleId" | "email">
+  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  connectedSocials?: Prisma.ConnectedSocialListRelationFilter
+}, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
-  googleId?: Prisma.SortOrder
-  email?: Prisma.SortOrder
+  id?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrderInput | Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  lastSignInAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -232,106 +265,139 @@ export type UserScalarWhereWithAggregatesInput = {
   AND?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
   OR?: Prisma.UserScalarWhereWithAggregatesInput[]
   NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
-  googleId?: Prisma.StringWithAggregatesFilter<"User"> | string
-  email?: Prisma.StringWithAggregatesFilter<"User"> | string
+  id?: Prisma.UuidWithAggregatesFilter<"User"> | string
   fullName?: Prisma.StringWithAggregatesFilter<"User"> | string
+  email?: Prisma.StringWithAggregatesFilter<"User"> | string
+  passwordHash?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  isActive?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  role?: Prisma.EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
   avatarUrl?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
-  lastSignInAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
 
 export type UserCreateInput = {
-  googleId: string
-  email: string
+  id?: string
   fullName: string
+  email: string
+  passwordHash?: string | null
+  isActive?: boolean
+  role?: $Enums.UserRole
   avatarUrl?: string | null
   createdAt?: Date | string
-  lastSignInAt?: Date | string
-  cart?: Prisma.CartCreateNestedOneWithoutUserInput
+  updatedAt?: Date | string
+  connectedSocials?: Prisma.ConnectedSocialCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
-  googleId: string
-  email: string
+  id?: string
   fullName: string
+  email: string
+  passwordHash?: string | null
+  isActive?: boolean
+  role?: $Enums.UserRole
   avatarUrl?: string | null
   createdAt?: Date | string
-  lastSignInAt?: Date | string
-  cart?: Prisma.CartUncheckedCreateNestedOneWithoutUserInput
+  updatedAt?: Date | string
+  connectedSocials?: Prisma.ConnectedSocialUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
-  googleId?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lastSignInAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cart?: Prisma.CartUpdateOneWithoutUserNestedInput
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  connectedSocials?: Prisma.ConnectedSocialUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
-  googleId?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lastSignInAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cart?: Prisma.CartUncheckedUpdateOneWithoutUserNestedInput
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  connectedSocials?: Prisma.ConnectedSocialUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
-  googleId: string
-  email: string
+  id?: string
   fullName: string
+  email: string
+  passwordHash?: string | null
+  isActive?: boolean
+  role?: $Enums.UserRole
   avatarUrl?: string | null
   createdAt?: Date | string
-  lastSignInAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type UserUpdateManyMutationInput = {
-  googleId?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lastSignInAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserUncheckedUpdateManyInput = {
-  googleId?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lastSignInAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserCountOrderByAggregateInput = {
-  googleId?: Prisma.SortOrder
-  email?: Prisma.SortOrder
+  id?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  lastSignInAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
-  googleId?: Prisma.SortOrder
-  email?: Prisma.SortOrder
+  id?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  lastSignInAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
-  googleId?: Prisma.SortOrder
-  email?: Prisma.SortOrder
+  id?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  lastSignInAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -347,118 +413,181 @@ export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
 }
 
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
+export type EnumUserRoleFieldUpdateOperationsInput = {
+  set?: $Enums.UserRole
+}
+
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
-export type UserCreateNestedOneWithoutCartInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutCartInput, Prisma.UserUncheckedCreateWithoutCartInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCartInput
+export type UserCreateNestedOneWithoutConnectedSocialsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutConnectedSocialsInput, Prisma.UserUncheckedCreateWithoutConnectedSocialsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutConnectedSocialsInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutCartNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutCartInput, Prisma.UserUncheckedCreateWithoutCartInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCartInput
-  upsert?: Prisma.UserUpsertWithoutCartInput
+export type UserUpdateOneRequiredWithoutConnectedSocialsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutConnectedSocialsInput, Prisma.UserUncheckedCreateWithoutConnectedSocialsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutConnectedSocialsInput
+  upsert?: Prisma.UserUpsertWithoutConnectedSocialsInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCartInput, Prisma.UserUpdateWithoutCartInput>, Prisma.UserUncheckedUpdateWithoutCartInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutConnectedSocialsInput, Prisma.UserUpdateWithoutConnectedSocialsInput>, Prisma.UserUncheckedUpdateWithoutConnectedSocialsInput>
 }
 
-export type UserCreateWithoutCartInput = {
-  googleId: string
-  email: string
+export type UserCreateWithoutConnectedSocialsInput = {
+  id?: string
   fullName: string
+  email: string
+  passwordHash?: string | null
+  isActive?: boolean
+  role?: $Enums.UserRole
   avatarUrl?: string | null
   createdAt?: Date | string
-  lastSignInAt?: Date | string
+  updatedAt?: Date | string
 }
 
-export type UserUncheckedCreateWithoutCartInput = {
-  googleId: string
-  email: string
+export type UserUncheckedCreateWithoutConnectedSocialsInput = {
+  id?: string
   fullName: string
+  email: string
+  passwordHash?: string | null
+  isActive?: boolean
+  role?: $Enums.UserRole
   avatarUrl?: string | null
   createdAt?: Date | string
-  lastSignInAt?: Date | string
+  updatedAt?: Date | string
 }
 
-export type UserCreateOrConnectWithoutCartInput = {
+export type UserCreateOrConnectWithoutConnectedSocialsInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutCartInput, Prisma.UserUncheckedCreateWithoutCartInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutConnectedSocialsInput, Prisma.UserUncheckedCreateWithoutConnectedSocialsInput>
 }
 
-export type UserUpsertWithoutCartInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutCartInput, Prisma.UserUncheckedUpdateWithoutCartInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutCartInput, Prisma.UserUncheckedCreateWithoutCartInput>
+export type UserUpsertWithoutConnectedSocialsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutConnectedSocialsInput, Prisma.UserUncheckedUpdateWithoutConnectedSocialsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutConnectedSocialsInput, Prisma.UserUncheckedCreateWithoutConnectedSocialsInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutCartInput = {
+export type UserUpdateToOneWithWhereWithoutConnectedSocialsInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutCartInput, Prisma.UserUncheckedUpdateWithoutCartInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutConnectedSocialsInput, Prisma.UserUncheckedUpdateWithoutConnectedSocialsInput>
 }
 
-export type UserUpdateWithoutCartInput = {
-  googleId?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+export type UserUpdateWithoutConnectedSocialsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lastSignInAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type UserUncheckedUpdateWithoutCartInput = {
-  googleId?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+export type UserUncheckedUpdateWithoutConnectedSocialsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lastSignInAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+
+/**
+ * Count Type UserCountOutputType
+ */
+
+export type UserCountOutputType = {
+  connectedSocials: number
+}
+
+export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  connectedSocials?: boolean | UserCountOutputTypeCountConnectedSocialsArgs
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserCountOutputType
+   */
+  select?: Prisma.UserCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountConnectedSocialsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ConnectedSocialWhereInput
+}
 
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  googleId?: boolean
-  email?: boolean
+  id?: boolean
   fullName?: boolean
+  email?: boolean
+  passwordHash?: boolean
+  isActive?: boolean
+  role?: boolean
   avatarUrl?: boolean
   createdAt?: boolean
-  lastSignInAt?: boolean
-  cart?: boolean | Prisma.User$cartArgs<ExtArgs>
+  updatedAt?: boolean
+  connectedSocials?: boolean | Prisma.User$connectedSocialsArgs<ExtArgs>
+  _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  googleId?: boolean
-  email?: boolean
+  id?: boolean
   fullName?: boolean
+  email?: boolean
+  passwordHash?: boolean
+  isActive?: boolean
+  role?: boolean
   avatarUrl?: boolean
   createdAt?: boolean
-  lastSignInAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  googleId?: boolean
-  email?: boolean
+  id?: boolean
   fullName?: boolean
+  email?: boolean
+  passwordHash?: boolean
+  isActive?: boolean
+  role?: boolean
   avatarUrl?: boolean
   createdAt?: boolean
-  lastSignInAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
-  googleId?: boolean
-  email?: boolean
+  id?: boolean
   fullName?: boolean
+  email?: boolean
+  passwordHash?: boolean
+  isActive?: boolean
+  role?: boolean
   avatarUrl?: boolean
   createdAt?: boolean
-  lastSignInAt?: boolean
+  updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"googleId" | "email" | "fullName" | "avatarUrl" | "createdAt" | "lastSignInAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "fullName" | "email" | "passwordHash" | "isActive" | "role" | "avatarUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  cart?: boolean | Prisma.User$cartArgs<ExtArgs>
+  connectedSocials?: boolean | Prisma.User$connectedSocialsArgs<ExtArgs>
+  _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -466,15 +595,18 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
-    cart: Prisma.$CartPayload<ExtArgs> | null
+    connectedSocials: Prisma.$ConnectedSocialPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    googleId: string
-    email: string
+    id: string
     fullName: string
+    email: string
+    passwordHash: string | null
+    isActive: boolean
+    role: $Enums.UserRole
     avatarUrl: string | null
     createdAt: Date
-    lastSignInAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -558,8 +690,8 @@ export interface UserDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
    * // Get first 10 Users
    * const users = await prisma.user.findMany({ take: 10 })
    * 
-   * // Only select the `googleId`
-   * const userWithGoogleIdOnly = await prisma.user.findMany({ select: { googleId: true } })
+   * // Only select the `id`
+   * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
    * 
    */
   findMany<T extends UserFindManyArgs>(args?: Prisma.SelectSubset<T, UserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -603,9 +735,9 @@ export interface UserDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
    *   ]
    * })
    * 
-   * // Create many Users and only return the `googleId`
-   * const userWithGoogleIdOnly = await prisma.user.createManyAndReturn({
-   *   select: { googleId: true },
+   * // Create many Users and only return the `id`
+   * const userWithIdOnly = await prisma.user.createManyAndReturn({
+   *   select: { id: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -694,9 +826,9 @@ export interface UserDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
    *   ]
    * })
    * 
-   * // Update zero or more Users and only return the `googleId`
-   * const userWithGoogleIdOnly = await prisma.user.updateManyAndReturn({
-   *   select: { googleId: true },
+   * // Update zero or more Users and only return the `id`
+   * const userWithIdOnly = await prisma.user.updateManyAndReturn({
+   *   select: { id: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -869,7 +1001,7 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  cart<T extends Prisma.User$cartArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$cartArgs<ExtArgs>>): Prisma.Prisma__CartClient<runtime.Types.Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  connectedSocials<T extends Prisma.User$connectedSocialsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$connectedSocialsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConnectedSocialPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -899,12 +1031,15 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
  * Fields of the User model
  */
 export interface UserFieldRefs {
-  readonly googleId: Prisma.FieldRef<"User", 'String'>
-  readonly email: Prisma.FieldRef<"User", 'String'>
+  readonly id: Prisma.FieldRef<"User", 'String'>
   readonly fullName: Prisma.FieldRef<"User", 'String'>
+  readonly email: Prisma.FieldRef<"User", 'String'>
+  readonly passwordHash: Prisma.FieldRef<"User", 'String'>
+  readonly isActive: Prisma.FieldRef<"User", 'Boolean'>
+  readonly role: Prisma.FieldRef<"User", 'UserRole'>
   readonly avatarUrl: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
-  readonly lastSignInAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
     
 
@@ -1298,22 +1433,27 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * User.cart
+ * User.connectedSocials
  */
-export type User$cartArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$connectedSocialsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Cart
+   * Select specific fields to fetch from the ConnectedSocial
    */
-  select?: Prisma.CartSelect<ExtArgs> | null
+  select?: Prisma.ConnectedSocialSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Cart
+   * Omit specific fields from the ConnectedSocial
    */
-  omit?: Prisma.CartOmit<ExtArgs> | null
+  omit?: Prisma.ConnectedSocialOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.CartInclude<ExtArgs> | null
-  where?: Prisma.CartWhereInput
+  include?: Prisma.ConnectedSocialInclude<ExtArgs> | null
+  where?: Prisma.ConnectedSocialWhereInput
+  orderBy?: Prisma.ConnectedSocialOrderByWithRelationInput | Prisma.ConnectedSocialOrderByWithRelationInput[]
+  cursor?: Prisma.ConnectedSocialWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ConnectedSocialScalarFieldEnum | Prisma.ConnectedSocialScalarFieldEnum[]
 }
 
 /**
