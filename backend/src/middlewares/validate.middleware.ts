@@ -1,9 +1,11 @@
 import type { NextFunction, Request, Response } from 'express';
+import type { ParsedQs } from 'qs';
 import { z } from 'zod';
 
 interface ValidationSchemas {
   body?: z.ZodType;
   params?: z.ZodType;
+  query?: z.ZodType;
 }
 
 export function validate(schemas: ValidationSchemas) {
@@ -24,6 +26,15 @@ export function validate(schemas: ValidationSchemas) {
         return;
       }
       request.params = result.data as Record<string, string>;
+    }
+
+    if (schemas.query) {
+      const result = schemas.query.safeParse(request.query);
+      if (!result.success) {
+        response.status(400).json({ message: 'Invalid query parameters.', errors: result.error.flatten().fieldErrors });
+        return;
+      }
+      request.query = result.data as ParsedQs;
     }
 
     next();

@@ -27,6 +27,7 @@ model User {
   avatarUrl        String?           @map("avatar_url")
   connectedSocials ConnectedSocial[]
   products         Product[]
+  wishlists        Wishlist[]
   createdAt        DateTime          @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt        DateTime          @updatedAt @map("updated_at") @db.Timestamptz(6)
 
@@ -55,10 +56,25 @@ model Product {
   sellerId        String     @map("seller_id") @db.Uuid
   seller          User       @relation(fields: [sellerId], references: [id])
   categories      Category[]
+  wishlists       Wishlist[]
   createdAt       DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt       DateTime   @updatedAt @map("updated_at") @db.Timestamptz(6)
 
   @@map("products")
+}
+
+model Wishlist {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  productId String   @map("product_id") @db.Uuid
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@unique([userId, productId])
+  @@index([userId])
+  @@map("wishlists")
 }
 
 model ConnectedSocial {

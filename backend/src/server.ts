@@ -5,6 +5,7 @@ import { env } from './config/environment.js';
 import { passport } from './config/passport.js';
 import { authRouter } from './routes/auth.routes.js';
 import { ProductRouter } from './routes/product.routes.js';
+import { WishlistRouter } from './routes/wishlist.routes.js';
 
 const app = express();
 app.disable('x-powered-by');
@@ -14,5 +15,6 @@ app.use(cookieParser());
 app.use(passport.initialize());
 app.use('/api/v1', authRouter);
 app.use('/api/v1', ProductRouter);
+app.use('/api/v1', WishlistRouter);
 
 app.listen(env.port, () => console.log(`Morrow Goods backend running at http://localhost:${env.port}`));
