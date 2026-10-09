@@ -19,7 +19,7 @@ export type UserRole = (typeof UserRole)[keyof typeof UserRole]
 
 export const SocialProvider = {
   Google: 'Google',
-  facebook: 'facebook'
+  Facebook: 'Facebook'
 } as const
 
 export type SocialProvider = (typeof SocialProvider)[keyof typeof SocialProvider]
