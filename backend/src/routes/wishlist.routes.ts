@@ -7,7 +7,12 @@ import { WishlistParamSchema } from '../schemas/wishlist.schemas.js';
 const router = Router();
 
 router.post('/:productId', authenticate, validate({ params: WishlistParamSchema }), addToWishlist);
-router.delete('/:productId', authenticate, validate({ params: WishlistParamSchema }), removeFromWishlist);
+router.delete(
+  '/:productId',
+  authenticate,
+  validate({ params: WishlistParamSchema }),
+  removeFromWishlist,
+);
 
 export const WishlistRouter = Router();
 WishlistRouter.use('/wishlist', router);

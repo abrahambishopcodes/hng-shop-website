@@ -1,6 +1,16 @@
 import 'dotenv/config';
 
-const requiredVariables = ['GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET', 'SESSION_SECRET', 'JWT_ACCESS_SECRET', 'JWT_REFRESH_SECRET', 'SUPABASE_DATABASE_CONNECTION_STRING', 'BREVO_API_KEY', 'EMAIL_FROM', 'EMAIL_FROM_NAME'] as const;
+const requiredVariables = [
+  'GOOGLE_CLIENT_ID',
+  'GOOGLE_CLIENT_SECRET',
+  'SESSION_SECRET',
+  'JWT_ACCESS_SECRET',
+  'JWT_REFRESH_SECRET',
+  'SUPABASE_DATABASE_CONNECTION_STRING',
+  'BREVO_API_KEY',
+  'EMAIL_FROM',
+  'EMAIL_FROM_NAME',
+] as const;
 const missingVariables = requiredVariables.filter((name) => !process.env[name]);
 
 if (missingVariables.length > 0) {

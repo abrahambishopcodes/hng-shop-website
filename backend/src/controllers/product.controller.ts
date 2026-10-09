@@ -2,7 +2,12 @@ import type { Request, Response } from 'express';
 import type { z } from 'zod';
 import type { AuthenticatedRequest } from '../middlewares/auth.middleware.js';
 import { prisma } from '../lib/db.js';
-import type { AddProductSchema, ProductParamSchema, ProductQuerySchema, UpdateProductSchema } from '../schemas/product.schemas.js';
+import type {
+  AddProductSchema,
+  ProductParamSchema,
+  ProductQuerySchema,
+  UpdateProductSchema,
+} from '../schemas/product.schemas.js';
 
 const productInclude = {
   categories: { select: { id: true, name: true } },
@@ -38,8 +43,16 @@ export async function getProducts(request: Request, response: Response): Promise
 }
 
 export async function addProduct(request: Request, response: Response): Promise<void> {
-  const { title, description, price, discount, productImageKey, noInStock, freeDelivery, categories } =
-    request.body as z.infer<typeof AddProductSchema>;
+  const {
+    title,
+    description,
+    price,
+    discount,
+    productImageKey,
+    noInStock,
+    freeDelivery,
+    categories,
+  } = request.body as z.infer<typeof AddProductSchema>;
   const { userId } = (request as AuthenticatedRequest).auth!;
 
   try {

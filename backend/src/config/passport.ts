@@ -12,74 +12,83 @@ export interface AuthenticatedGoogleUser {
   isNew: boolean;
 }
 
-const callbackURL = env.googleRedirectUri || `http://localhost:${env.port}/api/v1/auth/google/callback`;
+const callbackURL =
+  env.googleRedirectUri || `http://localhost:${env.port}/api/v1/auth/google/callback`;
 
-passport.use(new GoogleStrategy(
-  {
-    clientID: env.googleClientId!,
-    clientSecret: env.googleClientSecret!,
-    callbackURL,
-  },
-  async (_accessToken, _refreshToken, profile: Profile, done) => {
-    try {
-      const email = profile.emails?.[0]?.value.toLowerCase();
-      const googleProfile = profile._json as { email_verified?: boolean; verified_email?: boolean } | undefined;
-      const emailIsVerified = googleProfile?.email_verified ?? googleProfile?.verified_email;
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: env.googleClientId!,
+      clientSecret: env.googleClientSecret!,
+      callbackURL,
+    },
+    async (_accessToken, _refreshToken, profile: Profile, done) => {
+      try {
+        const email = profile.emails?.[0]?.value.toLowerCase();
+        const googleProfile = profile._json as
+          { email_verified?: boolean; verified_email?: boolean } | undefined;
+        const emailIsVerified = googleProfile?.email_verified ?? googleProfile?.verified_email;
 
-      if (!profile.id || !email || emailIsVerified === false) {
-        return done(null, false);
-      }
+        if (!profile.id || !email || emailIsVerified === false) {
+          return done(null, false);
+        }
 
-      const authenticatedUser = await prisma.$transaction(async (transaction) => {
-        const connectedSocial = await transaction.connectedSocial.findUnique({
-          where: {
-            providerId_providerName: {
-              providerId: profile.id,
-              providerName: SocialProvider.Google,
+        const authenticatedUser = await prisma.$transaction(async (transaction) => {
+          const connectedSocial = await transaction.connectedSocial.findUnique({
+            where: {
+              providerId_providerName: {
+                providerId: profile.id,
+                providerName: SocialProvider.Google,
+              },
             },
-          },
-          include: { user: true },
-        });
+            include: { user: true },
+          });
 
-        if (connectedSocial) {
-          // An identity is permanently bound to its user's email. A changed provider
-          // email must be resolved by account support rather than silently linked.
-          if (!connectedSocial.user.isActive || connectedSocial.user.email.toLowerCase() !== email) {
+          if (connectedSocial) {
+            // An identity is permanently bound to its user's email. A changed provider
+            // email must be resolved by account support rather than silently linked.
+            if (
+              !connectedSocial.user.isActive ||
+              connectedSocial.user.email.toLowerCase() !== email
+            ) {
+              return null;
+            }
+
+            return { ...connectedSocial.user, isNew: false };
+          }
+
+          const existingUser = await transaction.user.findUnique({ where: { email } });
+          if (existingUser && !existingUser.isActive) {
             return null;
           }
 
-          return { ...connectedSocial.user, isNew: false };
-        }
+          const user =
+            existingUser ??
+            (await transaction.user.create({
+              data: {
+                email,
+                fullName: profile.displayName || email,
+                avatarUrl: profile.photos?.[0]?.value || null,
+              },
+            }));
 
-        const existingUser = await transaction.user.findUnique({ where: { email } });
-        if (existingUser && !existingUser.isActive) {
-          return null;
-        }
+          await transaction.connectedSocial.create({
+            data: {
+              providerId: profile.id,
+              providerName: SocialProvider.Google,
+              userId: user.id,
+            },
+          });
 
-        const user = existingUser ?? await transaction.user.create({
-          data: {
-            email,
-            fullName: profile.displayName || email,
-            avatarUrl: profile.photos?.[0]?.value || null,
-          },
+          return { ...user, isNew: !existingUser };
         });
 
-        await transaction.connectedSocial.create({
-          data: {
-            providerId: profile.id,
-            providerName: SocialProvider.Google,
-            userId: user.id,
-          },
-        });
-
-        return { ...user, isNew: !existingUser };
-      });
-
-      return done(null, authenticatedUser ?? false);
-    } catch (error) {
-      return done(error as Error);
-    }
-  },
-));
+        return done(null, authenticatedUser ?? false);
+      } catch (error) {
+        return done(error as Error);
+      }
+    },
+  ),
+);
 
 export { passport };

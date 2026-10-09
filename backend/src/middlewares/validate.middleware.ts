@@ -13,7 +13,9 @@ export function validate(schemas: ValidationSchemas) {
     if (schemas.body) {
       const result = schemas.body.safeParse(request.body);
       if (!result.success) {
-        response.status(400).json({ message: 'Invalid request data.', errors: result.error.flatten().fieldErrors });
+        response
+          .status(400)
+          .json({ message: 'Invalid request data.', errors: result.error.flatten().fieldErrors });
         return;
       }
       request.body = result.data;
@@ -22,7 +24,9 @@ export function validate(schemas: ValidationSchemas) {
     if (schemas.params) {
       const result = schemas.params.safeParse(request.params);
       if (!result.success) {
-        response.status(400).json({ message: 'Invalid request params.', errors: result.error.flatten().fieldErrors });
+        response
+          .status(400)
+          .json({ message: 'Invalid request params.', errors: result.error.flatten().fieldErrors });
         return;
       }
       request.params = result.data as Record<string, string>;
@@ -31,7 +35,10 @@ export function validate(schemas: ValidationSchemas) {
     if (schemas.query) {
       const result = schemas.query.safeParse(request.query);
       if (!result.success) {
-        response.status(400).json({ message: 'Invalid query parameters.', errors: result.error.flatten().fieldErrors });
+        response.status(400).json({
+          message: 'Invalid query parameters.',
+          errors: result.error.flatten().fieldErrors,
+        });
         return;
       }
       request.query = result.data as ParsedQs;

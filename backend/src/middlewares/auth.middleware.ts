@@ -25,10 +25,10 @@ function verifyToken(token: string, type: TokenType): TokenPayload | null {
     const payload = jwt.verify(token, secret);
 
     if (
-      typeof payload === 'string'
-      || typeof payload.sub !== 'string'
-      || payload.type !== type
-      || !Object.values(UserRole).includes(payload.role as UserRole)
+      typeof payload === 'string' ||
+      typeof payload.sub !== 'string' ||
+      payload.type !== type ||
+      !Object.values(UserRole).includes(payload.role as UserRole)
     ) {
       return null;
     }
@@ -57,7 +57,11 @@ export function readRefreshToken(token: string | undefined): TokenPayload | null
   return token ? verifyToken(token, 'refresh') : null;
 }
 
-export async function authenticate(request: Request, response: Response, next: NextFunction): Promise<void> {
+export async function authenticate(
+  request: Request,
+  response: Response,
+  next: NextFunction,
+): Promise<void> {
   const authorization = request.get('authorization');
   const token = authorization?.startsWith('Bearer ') ? authorization.slice(7) : undefined;
   const payload = token ? verifyToken(token, 'access') : null;

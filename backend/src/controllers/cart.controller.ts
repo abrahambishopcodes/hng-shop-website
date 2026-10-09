@@ -2,13 +2,25 @@ import type { Request, Response } from 'express';
 import type { z } from 'zod';
 import type { AuthenticatedRequest } from '../middlewares/auth.middleware.js';
 import { prisma } from '../lib/db.js';
-import type { AddToCartSchema, CartItemParamSchema, UpdateCartItemSchema } from '../schemas/cart.schemas.js';
+import type {
+  AddToCartSchema,
+  CartItemParamSchema,
+  UpdateCartItemSchema,
+} from '../schemas/cart.schemas.js';
 
 const cartInclude = {
   items: {
     include: {
       product: {
-        select: { id: true, title: true, price: true, discount: true, productImageKey: true, noInStock: true, freeDelivery: true },
+        select: {
+          id: true,
+          title: true,
+          price: true,
+          discount: true,
+          productImageKey: true,
+          noInStock: true,
+          freeDelivery: true,
+        },
       },
     },
     orderBy: { createdAt: 'asc' as const },
@@ -41,7 +53,10 @@ export async function addToCart(request: Request, response: Response): Promise<v
   const { userId } = (request as AuthenticatedRequest).auth!;
 
   try {
-    const product = await prisma.product.findUnique({ where: { id: productId }, select: { id: true, noInStock: true } });
+    const product = await prisma.product.findUnique({
+      where: { id: productId },
+      select: { id: true, noInStock: true },
+    });
     if (!product) {
       response.status(404).json({ message: 'Product not found.' });
       return;
@@ -61,7 +76,15 @@ export async function addToCart(request: Request, response: Response): Promise<v
       data: { cartId: cart.id, productId, quantity },
       include: {
         product: {
-          select: { id: true, title: true, price: true, discount: true, productImageKey: true, noInStock: true, freeDelivery: true },
+          select: {
+            id: true,
+            title: true,
+            price: true,
+            discount: true,
+            productImageKey: true,
+            noInStock: true,
+            freeDelivery: true,
+          },
         },
       },
     });
@@ -69,7 +92,9 @@ export async function addToCart(request: Request, response: Response): Promise<v
     response.status(201).json({ item });
   } catch (error) {
     if ((error as { code?: string }).code === 'P2002') {
-      response.status(409).json({ message: 'Product is already in cart. Update its quantity instead.' });
+      response
+        .status(409)
+        .json({ message: 'Product is already in cart. Update its quantity instead.' });
       return;
     }
     console.error('Add to cart failed:', (error as Error).message);
@@ -94,7 +119,15 @@ export async function updateCartItem(request: Request, response: Response): Prom
       data: { quantity },
       include: {
         product: {
-          select: { id: true, title: true, price: true, discount: true, productImageKey: true, noInStock: true, freeDelivery: true },
+          select: {
+            id: true,
+            title: true,
+            price: true,
+            discount: true,
+            productImageKey: true,
+            noInStock: true,
+            freeDelivery: true,
+          },
         },
       },
     });

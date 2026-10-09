@@ -4,24 +4,49 @@ import type { Request, Response } from 'express';
 import type { z } from 'zod';
 import { env } from '../config/environment.js';
 import type { AuthenticatedGoogleUser } from '../config/passport.js';
-import { createAccessToken, createRefreshToken, readRefreshToken } from '../middlewares/auth.middleware.js';
+import {
+  createAccessToken,
+  createRefreshToken,
+  readRefreshToken,
+} from '../middlewares/auth.middleware.js';
 import { prisma } from '../lib/db.js';
 import type { loginSchema, signUpSchema } from '../schemas/auth.schemas.js';
 import { sendWelcomeEmail } from '../services/email.service.js';
 
 function setSession(response: Response, user: object): void {
-  const payload = Buffer.from(JSON.stringify({ user, exp: Date.now() + 1000 * 60 * 60 * 24 * 7 })).toString('base64url');
-  const signature = crypto.createHmac('sha256', env.sessionSecret!).update(payload).digest('base64url');
-  response.cookie('morrow_session', `${payload}.${signature}`, { httpOnly: true, secure: env.isProduction, sameSite: 'lax', maxAge: 1000 * 60 * 60 * 24 * 7, path: '/' });
+  const payload = Buffer.from(
+    JSON.stringify({ user, exp: Date.now() + 1000 * 60 * 60 * 24 * 7 }),
+  ).toString('base64url');
+  const signature = crypto
+    .createHmac('sha256', env.sessionSecret!)
+    .update(payload)
+    .digest('base64url');
+  response.cookie('morrow_session', `${payload}.${signature}`, {
+    httpOnly: true,
+    secure: env.isProduction,
+    sameSite: 'lax',
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+    path: '/',
+  });
 }
 
 function readSession(token: string | undefined): object | null {
   if (!token || !token.includes('.')) return null;
   const [payload, signature] = token.split('.');
-  const expected = crypto.createHmac('sha256', env.sessionSecret!).update(payload).digest('base64url');
-  if (signature.length !== expected.length || !crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected))) return null;
+  const expected = crypto
+    .createHmac('sha256', env.sessionSecret!)
+    .update(payload)
+    .digest('base64url');
+  if (
+    signature.length !== expected.length ||
+    !crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected))
+  )
+    return null;
   try {
-    const session = JSON.parse(Buffer.from(payload, 'base64url').toString()) as { user: object; exp: number };
+    const session = JSON.parse(Buffer.from(payload, 'base64url').toString()) as {
+      user: object;
+      exp: number;
+    };
     return session.exp > Date.now() ? session.user : null;
   } catch {
     return null;
@@ -38,7 +63,17 @@ function setRefreshToken(response: Response, token: string): void {
   });
 }
 
-function sendTokenResponse(response: Response, user: { id: string; fullName: string; email: string; role: 'Admin' | 'User'; avatarUrl: string | null }, status = 200): void {
+function sendTokenResponse(
+  response: Response,
+  user: {
+    id: string;
+    fullName: string;
+    email: string;
+    role: 'Admin' | 'User';
+    avatarUrl: string | null;
+  },
+  status = 200,
+): void {
   setRefreshToken(response, createRefreshToken(user));
   response.status(status).json({
     accessToken: createAccessToken(user),
@@ -109,7 +144,14 @@ export async function refreshAccessToken(request: Request, response: Response): 
   try {
     const user = await prisma.user.findUnique({
       where: { id: payload.sub },
-      select: { id: true, fullName: true, email: true, role: true, avatarUrl: true, isActive: true },
+      select: {
+        id: true,
+        fullName: true,
+        email: true,
+        role: true,
+        avatarUrl: true,
+        isActive: true,
+      },
     });
 
     if (!user || !user.isActive) {
@@ -133,9 +175,16 @@ export function handleGoogleCallback(request: Request, response: Response): void
     return;
   }
 
-  setSession(response, { id: user.googleId, name: user.fullName, email: user.email, picture: user.avatarUrl });
+  setSession(response, {
+    id: user.googleId,
+    name: user.fullName,
+    email: user.email,
+    picture: user.avatarUrl,
+  });
   if (user.isNew) {
-    sendWelcomeEmail({ email: user.email, name: user.fullName }).catch((error: Error) => console.error('Welcome email failed:', error.message));
+    sendWelcomeEmail({ email: user.email, name: user.fullName }).catch((error: Error) =>
+      console.error('Welcome email failed:', error.message),
+    );
   }
 
   response.redirect(`${env.frontendUrl}/?auth=success`);
@@ -146,7 +195,17 @@ export function getCurrentUser(request: Request, response: Response): void {
 }
 
 export function logout(_request: Request, response: Response): void {
-  response.clearCookie('morrow_session', { httpOnly: true, secure: env.isProduction, sameSite: 'lax', path: '/' });
-  response.clearCookie('morrow_refresh', { httpOnly: true, secure: env.isProduction, sameSite: 'lax', path: '/' });
+  response.clearCookie('morrow_session', {
+    httpOnly: true,
+    secure: env.isProduction,
+    sameSite: 'lax',
+    path: '/',
+  });
+  response.clearCookie('morrow_refresh', {
+    httpOnly: true,
+    secure: env.isProduction,
+    sameSite: 'lax',
+    path: '/',
+  });
   response.status(204).end();
 }

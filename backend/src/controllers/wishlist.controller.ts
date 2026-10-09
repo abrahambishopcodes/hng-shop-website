@@ -9,7 +9,10 @@ export async function addToWishlist(request: Request, response: Response): Promi
   const { userId } = (request as AuthenticatedRequest).auth!;
 
   try {
-    const productExists = await prisma.product.findUnique({ where: { id: productId }, select: { id: true } });
+    const productExists = await prisma.product.findUnique({
+      where: { id: productId },
+      select: { id: true },
+    });
     if (!productExists) {
       response.status(404).json({ message: 'Product not found.' });
       return;

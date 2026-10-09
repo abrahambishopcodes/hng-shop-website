@@ -24,34 +24,34 @@ npm run dev            # tsx watch, port 3001
 
 ## Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Watch mode via `tsx` |
+| Command         | Description                   |
+| --------------- | ----------------------------- |
+| `npm run dev`   | Watch mode via `tsx`          |
 | `npm run build` | Compile to `dist/` with `tsc` |
-| `npm start` | Run compiled `dist/server.js` |
+| `npm start`     | Run compiled `dist/server.js` |
 
 ## Environment variables
 
 See `.env.example` for the full list. Key ones:
 
-| Variable | Notes |
-|----------|-------|
-| `PORT` | Default `3001` |
-| `FRONTEND_URL` | Where to redirect after OAuth (e.g. `http://localhost:3000`) |
-| `GOOGLE_REDIRECT_URI` | Must match the URI registered in Google Cloud Console |
-| `SESSION_SECRET` | Long random string; signs the `morrow_session` cookie |
+| Variable                              | Notes                                                                                   |
+| ------------------------------------- | --------------------------------------------------------------------------------------- |
+| `PORT`                                | Default `3001`                                                                          |
+| `FRONTEND_URL`                        | Where to redirect after OAuth (e.g. `http://localhost:3000`)                            |
+| `GOOGLE_REDIRECT_URI`                 | Must match the URI registered in Google Cloud Console                                   |
+| `SESSION_SECRET`                      | Long random string; signs the `morrow_session` cookie                                   |
 | `SUPABASE_DATABASE_CONNECTION_STRING` | Postgres URL; its `[YOUR-PASSWORD]` token is replaced with `SUPABASE_DATABASE_PASSWORD` |
-| `DATABASE_URL` | Optional complete Postgres URL for Prisma CLI commands |
-| `BREVO_API_KEY` | Sends the welcome email on first sign-in |
+| `DATABASE_URL`                        | Optional complete Postgres URL for Prisma CLI commands                                  |
+| `BREVO_API_KEY`                       | Sends the welcome email on first sign-in                                                |
 
 ## API routes
 
-| Method | Path | Description |
-|--------|------|-------------|
-| `GET` | `/auth/google` | Starts the Google OAuth flow |
-| `GET` | `/auth/google/callback` | OAuth callback; sets cookie and redirects to `FRONTEND_URL` |
-| `GET` | `/api/me` | Returns the session user or `{ user: null }` |
-| `POST` | `/api/logout` | Clears the session cookie |
+| Method | Path                    | Description                                                 |
+| ------ | ----------------------- | ----------------------------------------------------------- |
+| `GET`  | `/auth/google`          | Starts the Google OAuth flow                                |
+| `GET`  | `/auth/google/callback` | OAuth callback; sets cookie and redirects to `FRONTEND_URL` |
+| `GET`  | `/api/me`               | Returns the session user or `{ user: null }`                |
+| `POST` | `/api/logout`           | Clears the session cookie                                   |
 
 ## Auth flow
 
